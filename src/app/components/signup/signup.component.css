@@ -1,0 +1,4 @@
+.disclaimer {
+  color: var(--light-theme);
+  font-size: var(--button-text-size);
+}

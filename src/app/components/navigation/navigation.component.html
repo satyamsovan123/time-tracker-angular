@@ -1,0 +1,137 @@
+<nav class="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="'/'">
+      <img
+        src="../../../assets/icon.svg"
+        class="logo"
+        alt=""
+        width="30"
+        height="30"
+      />
+      Time Tracker
+    </a>
+
+    <div class="mobile">
+      <button
+        class="navbar-toggler-button navbar-toggler custom-toggler"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasDarkNavbar"
+        aria-controls="offcanvasDarkNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasDarkNavbar"
+        aria-labelledby="offcanvasDarkNavbarLabel"
+      >
+        <div class="offcanvas-header">
+          <!-- <p class="offcanvas-title" id="offcanvasDarkNavbarLabel">Navigation</p> -->
+          <a class="navbar-brand" [routerLink]="'/'">
+            <img
+              src="../../../assets/icon.svg"
+              class="logo"
+              alt=""
+              width="30"
+              height="30"
+            />
+            Time Tracker
+          </a>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLinkActive]="'current-active-navigation-item'"
+                [routerLink]="'/tasks'"
+                aria-current="page"
+                data-bs-dismiss="offcanvas"
+                >Current tasks</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLinkActive]="'current-active-navigation-item'"
+                [routerLink]="'/dashboard'"
+                aria-current="page"
+                data-bs-dismiss="offcanvas"
+                >Dashboard</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                [routerLinkActive]="'current-active-navigation-item'"
+                [routerLink]="'/signin'"
+                aria-current="page"
+                data-bs-dismiss="offcanvas"
+                >Sign in</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                [routerLinkActive]="'current-active-navigation-item'"
+                [routerLink]="'/signup'"
+                aria-current="page"
+                data-bs-dismiss="offcanvas"
+                >Sign up</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                [routerLinkActive]="'current-active-navigation-item'"
+                [routerLink]="'/error'"
+                aria-current="page"
+                data-bs-dismiss="offcanvas"
+                >Error</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="desktop">
+      <a
+        class="nav-link"
+        [routerLinkActive]="'current-active-navigation-item'"
+        [routerLink]="'/tasks'"
+        aria-current="page"
+        >Current tasks</a
+      >
+      <a
+        class="nav-link"
+        [routerLinkActive]="'current-active-navigation-item'"
+        [routerLink]="'/dashboard'"
+        aria-current="page"
+        >Dashboard</a
+      >
+      <a
+        class="nav-link"
+        [routerLinkActive]="'current-active-navigation-item'"
+        [routerLink]="'/signin'"
+        aria-current="page"
+        >Sign in</a
+      >
+      <a
+        class="nav-link"
+        [routerLinkActive]="'current-active-navigation-item'"
+        [routerLink]="'/signup'"
+        aria-current="page"
+        >Sign up</a
+      >
+    </div>
+  </div>
+</nav>
