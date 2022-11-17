@@ -98,6 +98,16 @@
                 >Error</a
               >
             </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                [routerLinkActive]="'current-active-navigation-item'"
+                [routerLink]="'/help'"
+                aria-current="page"
+                data-bs-dismiss="offcanvas"
+                >Help</a
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -131,6 +141,13 @@
         [routerLink]="'/signup'"
         aria-current="page"
         >Sign up</a
+      >
+      <a
+        class="nav-link"
+        [routerLinkActive]="'current-active-navigation-item'"
+        [routerLink]="'/help'"
+        aria-current="page"
+        >Help</a
       >
     </div>
   </div>

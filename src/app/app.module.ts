@@ -10,6 +10,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { HelpComponent } from './components/help/help.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     SignupComponent,
     DashboardComponent,
     TasksComponent,
-    NavigationComponent
+    NavigationComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
