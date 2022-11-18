@@ -31,7 +31,7 @@
   --border-size: 2px;
 
   --navigation-paragraph-size: 17px;
-  --heading-size: 68px;
+  --heading-size: 51px;
   --section-title-size: 17px;
   --section-paragraph-size: 17px;
   --footer-size: 17px;
@@ -42,6 +42,7 @@
   --accordion-title-size: 17px;
   --accordion-paragraph-size: 17px;
   --accordion-span-size: 17px;
+  --accordion-header-height: 40px;
 
   --button-text-size: 17px;
 
@@ -139,14 +140,6 @@ input {
 
 /* Overriding default browser styles and bootstrap styles */
 
-/* ::-moz-selection {
-  background: var(--dark-theme) !important;
-}
-
-::selection {
-  background: var(--dark-theme) !important;
-} */
-
 textarea:hover,
 input:hover,
 textarea:active,
@@ -161,7 +154,6 @@ label:focus,
 .btn.active {
   outline: 0px;
   outline-width: 0;
-  -webkit-appearance: none;
   box-shadow: none !important;
 }
 
@@ -202,7 +194,7 @@ button:focus {
     --border-size: 1px;
 
     --navigation-paragraph-size: 15px;
-    --heading-size: 50px;
+    --heading-size: 30px;
     --section-title-size: 15px;
     --section-paragraph-size: 15px;
     --footer-size: 15px;
@@ -213,6 +205,7 @@ button:focus {
     --accordion-title-size: 15px;
     --accordion-paragraph-size: 15px;
     --accordion-span-size: 15px;
+    --accordion-header-height: 30px;
 
     --button-text-size: 15px;
 

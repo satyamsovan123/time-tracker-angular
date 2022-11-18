@@ -74,8 +74,21 @@ th {
   .custom-button {
     padding-top: var(--padding-top);
     padding-bottom: var(--padding-bottom);
-    margin-right: var(--margin-right);
+    margin-right: 0;
     margin-top: var(--margin-top);
+  }
+
+  .buttons {
+    justify-content: space-between;
+  }
+
+  .buttons > button {
+    /* justify-content: space-between; */
+    width: 50%;
+  }
+
+  .save-changes-button {
+    margin-left: 2%;
   }
 }
 
@@ -99,11 +112,14 @@ th {
   .custom-button {
     padding-top: 2% !important;
     padding-bottom: 2% !important;
-    margin-right: 2%;
     margin-top: 2%;
   }
 
   svg {
     height: 30px;
+  }
+
+  .save-changes-button {
+    margin-left: 2%;
   }
 }
