@@ -1,6 +1,10 @@
 <nav class="navbar">
   <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="'/'">
+    <a
+      [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
+      class="navbar-brand"
+      [routerLink]="'/'"
+    >
       <img
         src="../../../assets/icon.svg"
         class="logo"
@@ -14,12 +18,24 @@
     <div class="mobile">
       <button
         class="navbar-toggler-button navbar-toggler custom-toggler"
+        [ngClass]="
+          currentBackground == 'dark'
+            ? 'custom-toggler-light navbar-toggler-light'
+            : 'navbar-toggler custom-toggler'
+        "
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasDarkNavbar"
         aria-controls="offcanvasDarkNavbar"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span
+          [ngClass]="
+            currentBackground == 'dark'
+              ? 'navbar-toggler-icon-light'
+              : 'navbar-toggler-icon'
+          "
+          class="navbar-toggler-icon"
+        ></span>
       </button>
       <div
         class="offcanvas offcanvas-end"
@@ -29,7 +45,11 @@
       >
         <div class="offcanvas-header">
           <!-- <p class="offcanvas-title" id="offcanvasDarkNavbarLabel">Navigation</p> -->
-          <a class="navbar-brand" [routerLink]="'/'">
+          <a
+            data-bs-dismiss="offcanvas"
+            class="navbar-brand"
+            [routerLink]="'/'"
+          >
             <img
               src="../../../assets/icon.svg"
               class="logo"
@@ -116,6 +136,7 @@
     <div class="desktop">
       <a
         class="nav-link"
+        [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
         [routerLinkActive]="'current-active-navigation-item'"
         [routerLink]="'/tasks'"
         aria-current="page"
@@ -123,6 +144,7 @@
       >
       <a
         class="nav-link"
+        [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
         [routerLinkActive]="'current-active-navigation-item'"
         [routerLink]="'/dashboard'"
         aria-current="page"
@@ -130,6 +152,7 @@
       >
       <a
         class="nav-link"
+        [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
         [routerLinkActive]="'current-active-navigation-item'"
         [routerLink]="'/signin'"
         aria-current="page"
@@ -137,6 +160,7 @@
       >
       <a
         class="nav-link"
+        [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
         [routerLinkActive]="'current-active-navigation-item'"
         [routerLink]="'/signup'"
         aria-current="page"
@@ -144,6 +168,7 @@
       >
       <a
         class="nav-link"
+        [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
         [routerLinkActive]="'current-active-navigation-item'"
         [routerLink]="'/help'"
         aria-current="page"

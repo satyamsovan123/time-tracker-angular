@@ -3,6 +3,7 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,7 +28,11 @@ export class DashboardComponent {
     }
   }
 
-  constructor() {
+  ngOnInit(): void {
+    this.sharedService.updateStyle('light');
+  }
+
+  constructor(private sharedService: SharedService) {
     this.onResize();
   }
 
@@ -62,7 +67,7 @@ export class DashboardComponent {
         },
         grid: {
           color: '#ee7b39',
-          lineWidth: 0.5,
+          lineWidth: 0.2,
         },
       },
       y: {
@@ -93,7 +98,7 @@ export class DashboardComponent {
         },
         grid: {
           color: '#ee7b39',
-          lineWidth: 0.5,
+          lineWidth: 0.2,
         },
       },
     },

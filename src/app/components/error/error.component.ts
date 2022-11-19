@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-error',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
   errorMessage = 'Some error occured.';
-  constructor() {}
+  constructor(private sharedService: SharedService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sharedService.updateStyle('light');
+  }
 }

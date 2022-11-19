@@ -9,6 +9,14 @@ nav {
   font-weight: var(--semi-bold);
 }
 
+.light-theme {
+  color: var(--light-theme) !important;
+}
+
+.dark-theme {
+  color: var(--dark-theme) !important;
+}
+
 .logo {
   margin-right: var(--margin-right);
 }
@@ -21,19 +29,38 @@ nav {
   justify-content: right;
 }
 
-.nav-link {
-  color: var(--absolute-dark);
-}
-
 .custom-toggler .navbar-toggler-icon {
   border-radius: var(--border-radius);
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(238, 123, 57)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+.navbar-toggler-icon-light {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  /* background-image: var(--bs-navbar-toggler-icon-bg); */
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(254, 247, 234)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
 }
 
 .navbar-toggler {
   color: rgb(238, 123, 57);
   border-color: rgba(238, 123, 57, 0.5) !important;
   border-radius: var(--border-radius);
+}
+
+.navbar-toggler-light {
+  color: rgb(254, 247, 234);
+  border-color: rgba(254, 247, 234, 0.5) !important;
+  border-radius: var(--border-radius);
+}
+
+.custom-toggler-light .navbar-toggler-icon-light {
+  border-radius: var(--border-radius);
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(254, 247, 234)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
 }
 
 .btn-close {
@@ -66,6 +93,13 @@ nav {
   }
   .nav-link {
     color: var(--light-theme);
+  }
+}
+
+@media (max-width: 500px) {
+  .navbar-toggler-icon {
+    height: 20px;
+    width: 22px;
   }
 }
 

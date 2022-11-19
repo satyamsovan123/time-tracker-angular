@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedService {
+  currentStyle: ReplaySubject<any> = new ReplaySubject();
 
-  constructor() { }
+  constructor() {}
+
+  updateStyle(style: string) {
+    this.currentStyle.next(style);
+  }
 }
