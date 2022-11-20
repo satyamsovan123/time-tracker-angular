@@ -18,6 +18,9 @@ main {
 
 @media (max-width: 500px) {
   main {
-    margin-top: 5%;
+    margin-top: 10%;
+  }
+  .qna {
+    margin-bottom: 10%;
   }
 }

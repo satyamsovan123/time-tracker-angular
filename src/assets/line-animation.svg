@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="2117px" viewBox="0 0 1920 2117" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>SVG animation path</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="88.7114342%" id="linearGradient-1">
+            <stop stop-color="#FEF7EA" stop-opacity="0.903436407" offset="0%"></stop>
+            <stop stop-color="#EE7B39" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Mockups" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="bevel">
+        <g id="Homepage-desktop" stroke="url(#linearGradient-1)" stroke-width="3">
+            <path d="M-30.2781838,345 C-26.2422696,136.613378 97.4797395,49.1571445 340.887844,82.6312983 C706,132.842529 1220.74134,-172.76618 1329.74134,151.294461 C1438.74134,475.355101 1876.27147,680.506499 1556.81017,873.458182 C1237.34887,1066.40986 403.911868,755.279346 187,809.567038 C-29.911868,863.854731 72.7033172,1443.26365 451.351659,1283.56281 C830,1123.86197 1247.65927,1271.44372 1682.49799,1196.87612 C2117.3367,1122.30852 1738.68995,1535.10035 1964.0209,1644.0965 C2189.35185,1753.09265 1563.75779,2439.13983 869.1778,1928.25261 C174.597809,1417.36538 33.4202444,2131.42849 -17.7009622,2040.63283 C-68.8221689,1949.83717 -45.5097531,2881.27478 -45.5097531,2066.75159" id="SVG-animation-path"></path>
+        </g>
+    </g>
+</svg>
