@@ -1,15 +1,15 @@
 main {
-  margin-top: 15%;
   margin-bottom: var(--margin-bottom);
+  margin-top: 15%;
 }
 
 .row {
-  margin: auto;
-  justify-content: center;
   align-items: center;
   align-self: center;
+  justify-content: center;
   margin-left: auto;
   margin-right: auto;
+  margin: auto;
 }
 
 @media (max-width: 768px) {

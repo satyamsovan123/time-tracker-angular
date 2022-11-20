@@ -1,9 +1,9 @@
 h1 {
-  text-align: center;
+  color: var(--dark-theme);
   font-size: var(--heading-size);
   font-weight: var(--bold);
-  color: var(--dark-theme);
   margin-top: 15%;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

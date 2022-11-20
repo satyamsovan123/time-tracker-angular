@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
-import { SharedService } from 'src/app/services/shared.service';
+import { LoggerService } from 'src/app/services/utils/logger.service';
+import { SharedService } from 'src/app/services/utils/shared.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,12 +9,15 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent implements OnInit {
-  constructor(private sharedService: SharedService) {}
+  constructor(
+    private sharedService: SharedService,
+    private loggerService: LoggerService
+  ) {}
   currentBackground: string = 'light';
 
   async ngOnInit() {
     this.sharedService.currentStyle.subscribe((currentBackground) => {
-      console.log(currentBackground);
+      this.loggerService.log(currentBackground);
       this.currentBackground = currentBackground;
     });
   }

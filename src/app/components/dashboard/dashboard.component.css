@@ -71,12 +71,6 @@ p {
   overflow-y: scroll;
 }
 
-canvas {
-  /* max-height: 500px !important; */
-  /* min-width: 800px !important; */
-  /* width: 220%; */
-}
-
 .delete-account {
   font-weight: var(--semi-bold);
   text-decoration: underline;

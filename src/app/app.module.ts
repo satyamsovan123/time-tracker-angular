@@ -12,6 +12,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HelpComponent } from './components/help/help.component';
+import { InterceptorService } from './services/backend/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,14 @@ import { HelpComponent } from './components/help/help.component';
     AppRoutingModule,
     NgChartsModule.forRoot({ defaults: {} }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'HTTP_INTERCEPTORS',
+      useClass: InterceptorService,
+      multi: true,
+    },
+  ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

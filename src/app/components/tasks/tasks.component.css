@@ -8,10 +8,10 @@ main {
 }
 
 .main-form {
+  border-radius: var(--border-radius);
+  border: var(--border-size) solid var(--dark-theme);
   max-height: 80vh;
   padding: 2%;
-  border: var(--border-size) solid var(--dark-theme);
-  border-radius: var(--border-radius);
 }
 
 table {
@@ -23,10 +23,10 @@ thead {
 }
 
 input {
-  width: 50%;
-  border: var(--border-size) var(--dark-theme) solid !important;
-  border-radius: var(--border-radius);
   background-color: var(--light-theme);
+  border-radius: var(--border-radius);
+  border: var(--border-size) var(--dark-theme) solid !important;
+  width: 50%;
 }
 
 input:focus {
@@ -44,16 +44,16 @@ svg {
 }
 
 .custom-button {
-  padding-top: 1% !important;
-  padding-bottom: 1% !important;
   margin-right: var(--margin-right);
   margin-top: var(--margin-top);
+  padding-bottom: 1% !important;
+  padding-top: 1% !important;
 }
 
 th {
   color: var(--dark-theme) !important;
-  font-weight: var(--regular) !important;
   font-size: var(--section-paragraph-size) !important;
+  font-weight: var(--regular) !important;
 }
 
 .scrollable-view {
@@ -72,10 +72,10 @@ th {
 
 @media (max-width: 768px) {
   .custom-button {
-    padding-top: var(--padding-top);
-    padding-bottom: var(--padding-bottom);
     margin-right: 0;
     margin-top: var(--margin-top);
+    padding-bottom: var(--padding-bottom);
+    padding-top: var(--padding-top);
   }
 
   .buttons {
@@ -83,7 +83,7 @@ th {
   }
 
   .buttons > button {
-    /* justify-content: space-between; */
+    justify-content: space-between;
     width: 50%;
   }
 
@@ -110,9 +110,9 @@ th {
   }
 
   .custom-button {
-    padding-top: 2% !important;
-    padding-bottom: 2% !important;
     margin-top: 2%;
+    padding-bottom: 2% !important;
+    padding-top: 2% !important;
   }
 
   svg {

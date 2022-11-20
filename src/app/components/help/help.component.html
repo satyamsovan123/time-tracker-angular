@@ -1,21 +1,10 @@
 <main>
-  <div class="qna">
-    <h1>What is Time Tracker?</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto saepe
-      labore nisi temporibus blanditiis quo beatae veritatis modi expedita,
-      maiores, magnam iste quis commodi fuga cum minima, voluptatum perferendis
-      voluptatem!
-    </p>
-  </div>
-
-  <div class="qna">
-    <h1>What is Time Tracker?</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto saepe
-      labore nisi temporibus blanditiis quo beatae veritatis modi expedita,
-      maiores, magnam iste quis commodi fuga cum minima, voluptatum perferendis
-      voluptatem!
-    </p>
+  <div *ngFor="let helpData of this.helpData">
+    <div class="qna">
+      <h1>{{ helpData.question }}</h1>
+      <p>
+        {{ helpData.answer }}
+      </p>
+    </div>
   </div>
 </main>

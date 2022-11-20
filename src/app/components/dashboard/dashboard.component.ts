@@ -3,7 +3,8 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-import { SharedService } from 'src/app/services/shared.service';
+import { SharedService } from 'src/app/services/utils/shared.service';
+import { LoggerService } from 'src/app/services/utils/logger.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +21,7 @@ export class DashboardComponent {
   onResize() {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
-    console.log(this.screenWidth, window.innerWidth);
+    this.loggerService.log([this.screenWidth, window.innerWidth]);
     if (window.innerWidth < 500) {
       return false;
     } else {
@@ -32,7 +33,10 @@ export class DashboardComponent {
     this.sharedService.updateStyle('light');
   }
 
-  constructor(private sharedService: SharedService) {
+  constructor(
+    private sharedService: SharedService,
+    private loggerService: LoggerService
+  ) {
     this.onResize();
   }
 

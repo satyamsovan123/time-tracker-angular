@@ -5,7 +5,8 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
-import { SharedService } from 'src/app/services/shared.service';
+import { LoggerService } from 'src/app/services/utils/logger.service';
+import { SharedService } from 'src/app/services/utils/shared.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ import { SharedService } from 'src/app/services/shared.service';
 export class HomeComponent implements OnInit {
   constructor(
     private sharedService: SharedService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private loggerService: LoggerService
   ) {}
 
   @ViewChild('backgroundLine') backgroundLine: any;
@@ -34,7 +36,7 @@ export class HomeComponent implements OnInit {
     this.backgroundLine.nativeElement.style.strokeDashoffset = svgLength;
     let scrollPercent: number;
 
-    console.log(svgLength, scrollPosition, componentPosition);
+    this.loggerService.log([svgLength, scrollPosition, componentPosition]);
 
     if (scrollPosition < componentPosition) {
       this.backgroundLineDiv.nativeElement.style.setProperty(
@@ -47,7 +49,8 @@ export class HomeComponent implements OnInit {
       scrollPercent = (scrollPosition - componentPosition) / svgLength;
 
       const draw = svgLength * scrollPercent * 7.9;
-      console.log('draw', svgLength - draw);
+      this.loggerService.log(['draw', svgLength - draw]);
+
       this.backgroundLine.nativeElement.style.strokeDashoffset =
         draw - svgLength;
     }

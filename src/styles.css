@@ -5,6 +5,10 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --light-theme: #fef7ea;
   --dark-theme: #ee7b39;
@@ -156,14 +160,6 @@ label:focus,
   outline-width: 0;
   box-shadow: none !important;
 }
-
-/* 
-*:focus {
-  outline: 0px;
-  outline-width: 0px;
-  box-shadow: none !important;
-} 
-*/
 
 form .form-control:focus,
 button:focus {

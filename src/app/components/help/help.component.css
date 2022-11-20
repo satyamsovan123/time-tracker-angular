@@ -1,7 +1,7 @@
 h1 {
+  color: var(--dark-theme);
   font-size: var(--heading-size);
   font-weight: var(--bold);
-  color: var(--dark-theme);
 }
 
 p {
