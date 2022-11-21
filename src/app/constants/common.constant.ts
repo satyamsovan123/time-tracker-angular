@@ -15,4 +15,16 @@ export const COMMON_CONSTANTS = {
     'This data would be deleted, are you sure you want to delete this data?',
   DELETE_ACCOUNT_CONFIRMATION:
     'Your account and all the related data would be deleted immidiately, and this action is not reversible, are you sure you want to delete your account and all the related data?',
+
+  SIGNUP_SUCCESSFUL: 'Signup is successful!',
+};
+
+export const FORM_CONSTANTS = {
+  INVALID_FORM_STATUS: 'INVALID',
+  VALID_FORM_STATUS: 'VALID',
+  INVALID_FIELDS_IN_FORM: 'Some fields in the form are invalid.',
+  INVALID_EMAIL: 'Email is invalid',
+  INVALID_PASSWORD: 'Password is invalid',
+  INVALID_FIRSTNAME: 'First name is invalid',
+  INVALID_LASTNAME: 'Last name is invalid',
 };

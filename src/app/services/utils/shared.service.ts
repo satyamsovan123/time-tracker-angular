@@ -5,11 +5,16 @@ import { ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SharedService {
-  currentStyle: ReplaySubject<any> = new ReplaySubject();
+  currentStyle: ReplaySubject<string> = new ReplaySubject();
+  showLoader: ReplaySubject<boolean> = new ReplaySubject();
 
   constructor() {}
 
   updateStyle(style: string) {
     this.currentStyle.next(style);
+  }
+
+  updateLoaderStatus(status: boolean) {
+    this.showLoader.next(status);
   }
 }

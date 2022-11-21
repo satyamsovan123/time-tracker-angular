@@ -5,28 +5,87 @@
   <div class="row">
     <div class="col-lg-6 col-md-12">
       <div class="form-center">
-        <form>
+        <form [formGroup]="signupForm">
           <div class="mb-3">
-            <label for="firstName" class="form-label">First name</label>
-            <input type="text" class="form-control" id="firstName" />
+            <label for="firstName" class="form-label"
+              >First name
+              <span *ngIf="checkRequirement('firstName')">*</span></label
+            >
+            <input
+              formControlName="firstName"
+              type="text"
+              class="form-control"
+              id="firstName"
+              [placeholder]="
+                signupForm.get('firstName').touched ||
+                (signupForm.get('firstName').hasError('required') &&
+                  this.submitted)
+                  ? this.invalidFirstName
+                  : ''
+              "
+            />
           </div>
           <div class="mb-3">
-            <label for="lastName" class="form-label">Last name</label>
-            <input type="text" class="form-control" id="lastName" />
+            <label for="lastName" class="form-label"
+              >Last name
+              <span *ngIf="checkRequirement('lastName')">*</span></label
+            >
+            <input
+              formControlName="lastName"
+              type="text"
+              class="form-control"
+              id="lastName"
+              [placeholder]="
+                signupForm.get('lastName').touched ||
+                (signupForm.get('lastName').hasError('required') &&
+                  this.submitted)
+                  ? this.invalidLastName
+                  : ''
+              "
+            />
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" />
+            <label for="email" class="form-label"
+              >Email <span *ngIf="checkRequirement('email')">*</span></label
+            >
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="email"
+              [placeholder]="
+                signupForm.get('email').touched ||
+                (signupForm.get('email').hasError('required') && this.submitted)
+                  ? this.invalidEmail
+                  : ''
+              "
+            />
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" />
+            <label for="password" class="form-label"
+              >Password
+              <span *ngIf="checkRequirement('password')">*</span></label
+            >
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              id="password"
+              [placeholder]="
+                signupForm.get('password').touched ||
+                (signupForm.get('password').hasError('required') &&
+                  this.submitted)
+                  ? this.invalidPassword
+                  : ''
+              "
+            />
           </div>
           <p id="emailHelp" class="disclaimer">
             We will never share your data with anyone.
           </p>
           <button
             type="button"
+            (click)="handleSubmitForm()"
             class="mt-3 custom-button btn btn-primary light-button"
           >
             Sign up
@@ -36,3 +95,6 @@
     </div>
   </div>
 </main>
+
+{{ signupForm.value | json }}
+{{ signupForm.status | json }}

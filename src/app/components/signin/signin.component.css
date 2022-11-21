@@ -1,3 +1,7 @@
+.form-center {
+  box-shadow: var(--box-shadow);
+}
+
 main {
   margin-bottom: var(--margin-bottom);
   margin-top: 15%;

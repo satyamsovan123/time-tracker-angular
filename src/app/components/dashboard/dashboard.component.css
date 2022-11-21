@@ -16,6 +16,7 @@ main,
 .accordion {
   margin-bottom: var(--margin-bottom);
   border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 .accordion-button:after {

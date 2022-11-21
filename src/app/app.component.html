@@ -1,4 +1,9 @@
-<div class="container">
+<app-loader></app-loader>
+
+<div
+  [ngClass]="{ 'disable-screen-controls': disableBackground }"
+  class="container"
+>
   <app-navigation></app-navigation>
   <div class="container-fluid">
     <router-outlet></router-outlet>

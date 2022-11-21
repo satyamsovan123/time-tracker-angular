@@ -3,6 +3,16 @@
   font-size: var(--button-text-size);
 }
 
+.form-center {
+  box-shadow: var(--box-shadow);
+}
+
+input::placeholder {
+  color: var(--dark-theme);
+  font-size: 12px;
+  opacity: 0.5;
+}
+
 main {
   margin-bottom: var(--margin-bottom);
   margin-top: 15%;

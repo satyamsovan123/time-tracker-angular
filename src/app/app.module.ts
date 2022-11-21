@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgChartsModule } from 'ng2-charts';
+import { ToastrModule } from 'ngx-toastr';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +21,9 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { HelpComponent } from './components/help/help.component';
 import { InterceptorService } from './services/backend/interceptor.service';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from './components/shared/loader/loader.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,11 +35,21 @@ import { InterceptorService } from './services/backend/interceptor.service';
     TasksComponent,
     NavigationComponent,
     HelpComponent,
+    LoaderComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     NgChartsModule.forRoot({ defaults: {} }),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true,
+    }),
   ],
   providers: [
     {

@@ -12,6 +12,7 @@ main {
   border: var(--border-size) solid var(--dark-theme);
   max-height: 80vh;
   padding: 2%;
+  box-shadow: var(--box-shadow);
 }
 
 table {

@@ -73,7 +73,7 @@ section {
   overflow: hidden;
   min-height: 600px;
   max-height: 600px;
-  box-shadow: 15px 12px 13px -16px rgba(122, 70, 24, 0.67);
+  box-shadow: var(--box-shadow);
 }
 
 .feature-heading {
