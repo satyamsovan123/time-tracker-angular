@@ -97,7 +97,9 @@ section {
 
 .background-home {
   transition: 0.2s ease;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 2s, opacity 2.5s linear;
   pointer-events: none;
   opacity: 0.8;
   filter: blur(0.6px);

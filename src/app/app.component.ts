@@ -3,6 +3,7 @@ import { SharedService } from './services/utils/shared.service';
 
 /**
  * This component serves as the base component to be shown i.e this is the component that is bootstrapped
+ *
  * @requires {@link SharedService}
  */
 @Component({

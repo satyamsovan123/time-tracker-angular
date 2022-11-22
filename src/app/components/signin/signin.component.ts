@@ -10,17 +10,61 @@ import { BACKEND_ACTION_CONSTANTS } from 'src/app/constants/backend.constant';
 import { BackendResponse } from 'src/app/models/backendResponse.model';
 import { Signin } from 'src/app/models/signin.model';
 
+/**
+ * This component serves as the base component to be shown for signin component, it contains the logic for signing in
+ *
+ * @requires {@link SharedService}
+ * @requires {@link BackendService}
+ * @requires {@link ToastrService}
+ * @requires {@link LoggerService}
+ *
+ */
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent implements OnInit {
+  /**
+   * This is the signin form
+   *
+   * @type {FormGroup}
+   */
   signinForm: any;
+
+  /**
+   * This variable is true if the form is submitted atlesast once, since the component's start. By default it is false
+   *
+   * @type {boolean}
+   */
   submitted: boolean = false;
+
+  /**
+   * This variable holds the error message for invalid email
+   *
+   * @type {string}
+   */
   invalidEmail: string = FORM_CONSTANTS.INVALID_EMAIL;
+
+  /**
+   * This variable holds the error message for invalid password
+   *
+   * @type {string}
+   */
   invalidPassword: string = FORM_CONSTANTS.INVALID_PASSWORD;
+
+  /**
+   * This variable holds the error message for invalid first name
+   *
+   * @type {string}
+   */
   invalidFirstName: string = FORM_CONSTANTS.INVALID_FIRSTNAME;
+
+  /**
+   * This variable holds the error message for invalid last name
+   *
+   * @type {string}
+   */
   invalidLastName: string = FORM_CONSTANTS.INVALID_LASTNAME;
 
   constructor(
@@ -30,11 +74,23 @@ export class SigninComponent implements OnInit {
     private backendService: BackendService
   ) {}
 
+  /**
+   * This method is one of the lifecycle hooks for the AppComponent, it is called in the beginning.
+   * On the load of the component, the signin form is created.
+   * It also updates the current style to light, as it uses a light background, so that the updated style would be captured by the navigation component to change the color of navigation component.
+   *
+   * @returns {void} it returns nothing
+   */
   ngOnInit(): void {
     this.sharedService.updateStyle('light');
     this.createForm();
   }
 
+  /**
+   * This method creates the signin form, and the validators with default values as 'null'
+   *
+   * @returns {void} it returns nothing
+   */
   createForm(): void {
     this.signinForm = new FormGroup({
       email: new FormControl(null, [
@@ -50,15 +106,38 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  /**
+   * This method checks the requirement for the provided control (input)
+   *
+   * @param {string} control is the name of the control (i.e. the input)
+   * @returns {boolean} it returns the requirement for the input, if it returns true, then a (*) asterisks is shown against the input
+   */
   checkRequirement(control: string): boolean {
+    /**
+     * Checking if the control i.e. input has 'required' in the validations, then it returns true, i.e. the control is required, else it's not required
+     */
     if (control)
       if (this.signinForm.controls[control].validator(control))
         return this.signinForm.controls[control].validator(control)['required'];
     return false;
   }
 
-  validate(): boolean {
+  /**
+   * This method validates the entire form
+   *
+   * @returns {boolean} it returns true if form is valid, else it will return false
+   */
+  validateForm(): boolean {
+    /**
+     * This is the status of validation of the form, by default it's false
+     *
+     * @type {boolean}
+     */
     let validationStatus: boolean = false;
+
+    /**
+     * Checking if the form status is "INVALID", then calling the toastr service and showing the error message, else setting the validation value as true, and then returning the value
+     */
     if (this.signinForm.status === FORM_CONSTANTS.INVALID_FORM_STATUS) {
       this.toastrService.error(FORM_CONSTANTS.INVALID_FIELDS_IN_FORM);
     } else {
@@ -67,38 +146,109 @@ export class SigninComponent implements OnInit {
     return validationStatus;
   }
 
+  /**
+   * This method is called when user clicks on submit button, it calls the {@link validate()} function to validate and then it calls the backend service
+   *
+   * @returns {void} it returns nothing
+   */
   onSubmit(): void {
+    /**
+     * Setting the loader status to true, as it might take some time to validate form, send and receive data from backend
+     */
     this.sharedService.updateLoaderStatus(true);
-    this.submitted = true;
-    window.scrollTo(0, 0);
-    const validationStatus: boolean = this.validate();
 
+    /**
+     * Setting submitted status to true
+     */
+    this.submitted = true;
+
+    /**
+     * This is done for responsiveness
+     */
+    window.scrollTo(0, 0);
+
+    /**
+     * This is the status of validation status that is received from validateForm method
+     *
+     * @type {boolean}
+     * @const
+     */
+    const validationStatus: boolean = this.validateForm();
+
+    /**
+     * Checking if the form is invalid, then stopping the loader, by updating the loader status to false, and returning
+     */
     if (!validationStatus) {
       this.sharedService.updateLoaderStatus(false);
       return;
     }
+
+    /**
+     * This is the user variable that is made using the Signin model
+     *
+     * @type {Signin}
+     * @const
+     */
     const user: Signin = {
       email: this.signinForm.value.email,
       password: this.signinForm.value.password,
     };
+
+    /**
+     * Sending the user data to backend for authentication
+     */
     this.backendService
       .signin(user)
       .pipe(
         finalize(() => {
+          /**
+           * Setting the loader status to false, on succesful completion of backend call or on on unsuccesful completion of backend call
+           */
           this.sharedService.updateLoaderStatus(false);
         })
       )
       .subscribe({
+        /**
+         * This method is called on successful completion of the request made to backend
+         *
+         * @param response is the response from backend
+         */
         next: (response: any) => {
+          /**
+           * This is the response from backend that is mapped using the BackendResponse model
+           *
+           * @type {BackendResponse}
+           * @const
+           */
           const backendResponse = new BackendResponse(response);
-          this.loggerService.log(backendResponse);
+
+          /**
+           * Showing a success toastr with message either from backend or a static success message
+           */
           this.toastrService.success(
             backendResponse.message ||
               BACKEND_ACTION_CONSTANTS.SIGNUP_SUCCESSFUL
           );
+          this.loggerService.log(backendResponse);
         },
+
+        /**
+         * This method is called if the request made to backend was not successful
+         *
+         * @param response is the response from backend
+         */
         error: (response) => {
+          /**
+           * This is the response from backend that is mapped using the BackendResponse model
+           *
+           * @type {BackendResponse}
+           * @const
+           */
           const backendResponse = new BackendResponse(response.error);
+
+          /**
+           * Showing a error toastr with message either from backend or a static error message
+           */
           this.loggerService.log(backendResponse);
           this.toastrService.error(
             backendResponse.message ||

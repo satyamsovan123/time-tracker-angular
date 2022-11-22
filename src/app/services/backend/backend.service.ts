@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 
 /**
  * This service is used to connect with different backend APIs
- * @requires {@link LoggerService}
  *
+ * @requires {@link LoggerService}
  */
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class BackendService {
   ) {}
 
   /**
-   * This method is a POST method, and it sends the user details to backend for signing up
+   * This is a POST method, and it sends the user details to backend for signing up
    *
    * @param {{Signup}} newUser is the object containing details for the new user, that would be sent to backend
    * @returns {{Observable<Object>}} an observable which will contain response from backend
@@ -36,7 +36,7 @@ export class BackendService {
   }
 
   /**
-   * This method is a POST method, and it sends the user details to backend for signing in
+   * This is a POST method, and it sends the user details to backend for signing in
    *
    * @param {{Signup}} user is the object containing email and password of the user, that would be sent to backend
    * @returns {{Observable<Object>}} an observable which will contain response from backend
