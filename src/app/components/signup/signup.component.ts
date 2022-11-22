@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  COMMON_CONSTANTS,
-  FORM_CONSTANTS,
-} from 'src/app/constants/common.constant';
+import { FORM_CONSTANTS } from 'src/app/constants/common.constant';
 import { LoggerService } from 'src/app/services/utils/logger.service';
 import { SharedService } from 'src/app/services/utils/shared.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { Signup } from '../../models/signup.model';
 import { finalize } from 'rxjs/operators';
+import { BACKEND_ACTION_CONSTANTS } from 'src/app/constants/backend.constant';
+import { BackendResponse } from 'src/app/models/backendResponse.model';
 
 @Component({
   selector: 'app-signup',
@@ -33,11 +32,10 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedService.updateStyle('light');
-
     this.createForm();
   }
 
-  createForm() {
+  createForm(): void {
     this.signupForm = new FormGroup({
       firstName: new FormControl(null, [
         Validators.required,
@@ -66,7 +64,7 @@ export class SignupComponent implements OnInit {
         return this.signupForm.controls[control].validator(control)['required'];
   }
 
-  handleValidation(): boolean {
+  validate(): boolean {
     let validationStatus: boolean = false;
     if (this.signupForm.status === FORM_CONSTANTS.INVALID_FORM_STATUS) {
       this.toastrService.error(FORM_CONSTANTS.INVALID_FIELDS_IN_FORM);
@@ -76,15 +74,15 @@ export class SignupComponent implements OnInit {
     return validationStatus;
   }
 
-  handleSubmitForm() {
+  onSubmit(): void {
     this.sharedService.updateLoaderStatus(true);
     this.submitted = true;
     window.scrollTo(0, 0);
-    const validationStatus: boolean = this.handleValidation();
+    const validationStatus: boolean = this.validate();
 
     if (!validationStatus) {
       this.sharedService.updateLoaderStatus(false);
-      // return;
+      return;
     }
     const newUser: Signup = {
       email: this.signupForm.value.email,
@@ -96,23 +94,27 @@ export class SignupComponent implements OnInit {
       .signup(newUser)
       .pipe(
         finalize(() => {
-          console.log('after everything');
+          this.sharedService.updateLoaderStatus(false);
         })
       )
       .subscribe({
-        next: (result) => {
-          this.loggerService.log(result);
-          this.sharedService.updateLoaderStatus(false);
-          this.toastrService.success(COMMON_CONSTANTS.SIGNUP_SUCCESSFUL);
+        next: (response: any) => {
+          const backendResponse = new BackendResponse(response);
+          this.loggerService.log(backendResponse);
+          this.toastrService.success(
+            backendResponse.message ||
+              BACKEND_ACTION_CONSTANTS.SIGNUP_SUCCESSFUL
+          );
         },
-        error: (error) => {
-          this.loggerService.log(error);
-          this.sharedService.updateLoaderStatus(false);
-          this.toastrService.success(COMMON_CONSTANTS.SIGNUP_SUCCESSFUL);
+        error: (response) => {
+          const backendResponse = new BackendResponse(response.error);
+          this.loggerService.log(backendResponse);
+          this.toastrService.error(
+            backendResponse.message ||
+              BACKEND_ACTION_CONSTANTS.SIGNUP_UNSUCCESSFUL
+          );
         },
-        complete: () => {
-          console.log('????');
-        },
+        complete: () => {},
       });
   }
 }

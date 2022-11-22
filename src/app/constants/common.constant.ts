@@ -16,7 +16,11 @@ export const COMMON_CONSTANTS = {
   DELETE_ACCOUNT_CONFIRMATION:
     'Your account and all the related data would be deleted immidiately, and this action is not reversible, are you sure you want to delete your account and all the related data?',
 
-  SIGNUP_SUCCESSFUL: 'Signup is successful!',
+  LOG_ERROR: 'error',
+  LOG_SUCCESS: 'success',
+
+  LIGHT_THEME: 'light',
+  DARK_THEME: 'dark',
 };
 
 export const FORM_CONSTANTS = {

@@ -18,3 +18,8 @@ export const REQUEST_RESPONSE_BODY_HEADER_CONSTANTS = {
   END_TIME: 'endTime',
   TIME_USED: 'timeUsed',
 };
+
+export const BACKEND_ACTION_CONSTANTS = {
+  SIGNUP_SUCCESSFUL: 'Signup is successful!',
+  SIGNUP_UNSUCCESSFUL: 'Unable to signup, please try again after sometime.',
+};
