@@ -22,4 +22,7 @@ export const REQUEST_RESPONSE_BODY_HEADER_CONSTANTS = {
 export const BACKEND_ACTION_CONSTANTS = {
   SIGNUP_SUCCESSFUL: 'Signup is successful!',
   SIGNUP_UNSUCCESSFUL: 'Unable to signup, please try again after sometime.',
+
+  SIGNIN_SUCCESSFUL: 'Signin is successful!',
+  SIGNIN_UNSUCCESSFUL: 'Unable to signin, please try again after sometime.',
 };

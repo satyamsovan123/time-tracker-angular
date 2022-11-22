@@ -47,21 +47,22 @@ export class SignupComponent implements OnInit {
       ]),
       email: new FormControl(null, [
         Validators.required,
-        Validators.minLength(6),
         Validators.nullValidator,
         Validators.email,
       ]),
       password: new FormControl(null, [
         Validators.required,
+        Validators.minLength(6),
         Validators.nullValidator,
       ]),
     });
   }
 
-  checkRequirement(control: string) {
+  checkRequirement(control: string): boolean {
     if (control)
       if (this.signupForm.controls[control].validator(control))
         return this.signupForm.controls[control].validator(control)['required'];
+    return false;
   }
 
   validate(): boolean {

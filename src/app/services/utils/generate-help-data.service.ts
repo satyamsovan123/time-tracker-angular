@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Help } from '../../models/help.model';
 
+/**
+ * This service is used to get the data for {@link HelpComponent}
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class GenerateHelpDataService {
+  /**
+   * This is the variable that is of {@link Help} interface. It has the pre initialized objects with different questions and answers.
+   *
+   * @type {Help}
+   */
   help: Help[] = [
     {
       question: 'What is Time Tracker?',
@@ -37,8 +45,12 @@ export class GenerateHelpDataService {
         "Actually, no. I don't have time for jokes. But, I do have one timeless advice though, 'You should never try to wear a belt made out of watch belts, it's a waist of time.' ",
     },
   ];
-  constructor() {}
 
+  /**
+   * This method returns the help variable, which has questions and answers
+   *
+   * @returns {{Help}} help
+   */
   getHelpData() {
     return this.help;
   }

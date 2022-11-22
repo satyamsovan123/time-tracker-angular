@@ -7,6 +7,12 @@ main {
   margin-top: 15%;
 }
 
+input::placeholder {
+  color: var(--dark-theme);
+  font-size: 12px;
+  opacity: 0.5;
+}
+
 .row {
   align-items: center;
   align-self: center;

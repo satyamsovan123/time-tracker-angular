@@ -85,7 +85,7 @@ section {
 }
 
 .feature > img {
-  width: 50%;
+  width: 51.5%;
   border-top-right-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
 }

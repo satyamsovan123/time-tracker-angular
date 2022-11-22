@@ -5,17 +5,46 @@
   <div class="row">
     <div class="col-lg-6 col-md-12">
       <div class="form-center">
-        <form>
+        <form [formGroup]="signinForm">
           <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" />
+            <label for="email" class="form-label"
+              >Email <span *ngIf="checkRequirement('email')">*</span></label
+            >
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="email"
+              [placeholder]="
+                signinForm.get('email').touched ||
+                (signinForm.get('email').hasError('required') && this.submitted)
+                  ? this.invalidEmail
+                  : ''
+              "
+            />
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" />
+            <label for="password" class="form-label"
+              >Password
+              <span *ngIf="checkRequirement('password')">*</span></label
+            >
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              id="password"
+              [placeholder]="
+                signinForm.get('password').touched ||
+                (signinForm.get('password').hasError('required') &&
+                  this.submitted)
+                  ? this.invalidPassword
+                  : ''
+              "
+            />
           </div>
           <button
             type="button"
+            (click)="onSubmit()"
             class="mt-3 custom-button btn btn-primary light-button"
           >
             Sign in
@@ -25,3 +54,8 @@
     </div>
   </div>
 </main>
+
+<div class="text-center">
+  {{ signinForm.value | json }}
+  {{ signinForm.status | json }}
+</div>

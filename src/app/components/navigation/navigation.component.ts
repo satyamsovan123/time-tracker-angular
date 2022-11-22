@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
 import { LoggerService } from 'src/app/services/utils/logger.service';
 import { SharedService } from 'src/app/services/utils/shared.service';
 

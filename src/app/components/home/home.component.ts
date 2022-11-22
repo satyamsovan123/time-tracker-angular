@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
     const componentPosition = this.elementRef.nativeElement.offsetTop;
-    const scrollPosition = window.pageYOffset;
+    const scrollPosition = window.scrollY;
     const svgLength = this.backgroundLine.nativeElement.getTotalLength();
     this.backgroundLine.nativeElement.style.strokeDasharray = svgLength;
     this.backgroundLine.nativeElement.style.strokeDashoffset = svgLength;
