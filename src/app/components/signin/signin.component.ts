@@ -9,6 +9,7 @@ import { finalize } from 'rxjs/operators';
 import { BACKEND_ACTION_CONSTANTS } from 'src/app/constants/backend.constant';
 import { BackendResponse } from 'src/app/models/backendResponse.model';
 import { Signin } from 'src/app/models/signin.model';
+import { Router } from '@angular/router';
 
 /**
  * This component serves as the base component to be shown for signin component, it contains the logic for signing in
@@ -71,7 +72,8 @@ export class SigninComponent implements OnInit {
     private sharedService: SharedService,
     private loggerService: LoggerService,
     private toastrService: ToastrService,
-    private backendService: BackendService
+    private backendService: BackendService,
+    private router: Router
   ) {}
 
   /**
@@ -229,7 +231,12 @@ export class SigninComponent implements OnInit {
             backendResponse.message ||
               BACKEND_ACTION_CONSTANTS.SIGNUP_SUCCESSFUL
           );
-          this.loggerService.log(backendResponse);
+          this.loggerService.log(response);
+
+          /**
+           * Redirecting user to current tasks page
+           */
+          // this.router.navigateByUrl('/tasks');
         },
 
         /**

@@ -1,6 +1,7 @@
 export const API_CONSTANTS = {
   SIGNUP: '/signup',
   SIGNIN: '/signin',
+  SIGNOUT: '/signout',
   PROFILE: '/profile',
   TASK: '/task',
   INSIGHT: '/insight',

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BackendService } from 'src/app/services/backend/backend.service';
 import { LoggerService } from 'src/app/services/utils/logger.service';
 import { SharedService } from 'src/app/services/utils/shared.service';
 
@@ -7,6 +8,7 @@ import { SharedService } from 'src/app/services/utils/shared.service';
  *
  * @requires {@link SharedService}
  * @requires {@link LoggerService}
+ * @requires {@link BackendService}
  *
  */
 @Component({
@@ -17,7 +19,8 @@ import { SharedService } from 'src/app/services/utils/shared.service';
 export class NavigationComponent implements OnInit {
   constructor(
     private sharedService: SharedService,
-    private loggerService: LoggerService
+    private loggerService: LoggerService,
+    private backendService: BackendService
   ) {}
 
   /**
@@ -37,6 +40,17 @@ export class NavigationComponent implements OnInit {
     this.sharedService.currentStyle.subscribe((currentBackground) => {
       this.loggerService.log(currentBackground);
       this.currentBackground = currentBackground;
+    });
+  }
+
+  /**
+   * This method is called when user clicks on the sign out button, it calls the singOut method from {@link BackendService}, to clear the cookies
+   *
+   * @returns {void} it returns nothing
+   */
+  signOut(): void {
+    this.backendService.signOut().subscribe((response) => {
+      console.log(response);
     });
   }
 }

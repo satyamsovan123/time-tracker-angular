@@ -7,6 +7,7 @@ import {
   HttpClient,
   HttpClientModule,
   HttpHeaders,
+  HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -53,7 +54,7 @@ import { LoaderComponent } from './components/shared/loader/loader.component';
   ],
   providers: [
     {
-      provide: 'HTTP_INTERCEPTORS',
+      provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true,
     },

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { InterceptorService } from './interceptor.service';
 
-describe('RequestInterceptorService', () => {
+describe('InterceptorService', () => {
   let service: InterceptorService;
 
   beforeEach(() => {

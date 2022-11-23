@@ -173,6 +173,15 @@
         aria-current="page"
         >Help</a
       >
+      <a
+        class="nav-link"
+        (click)="signOut()"
+        [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
+        [routerLinkActive]="'current-active-navigation-item'"
+        [routerLink]="'/help'"
+        aria-current="page"
+        >Sign out</a
+      >
     </div>
   </div>
 </nav>

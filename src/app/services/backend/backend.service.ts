@@ -45,7 +45,20 @@ export class BackendService {
     this.loggerService.log(user);
     return this.httpClient.post(
       environment.backendURL + API_CONSTANTS.SIGNIN,
-      user
+      user,
+      { withCredentials: true }
     );
+  }
+
+  /**
+   * This is a POST method, and it sends the server to send back the request to browser to clear cookies
+   *
+   * @param {{Signup}} user is the object containing email and password of the user, that would be sent to backend
+   * @returns {{Observable<Object>}} an observable which will contain response from backend
+   */
+  signOut(): Observable<Object> {
+    return this.httpClient.get(environment.backendURL + API_CONSTANTS.SIGNOUT, {
+      withCredentials: true,
+    });
   }
 }
