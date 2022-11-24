@@ -61,8 +61,10 @@ export class SharedService {
 
   /**
    * This method removes the token from local storage
+   *
+   * @returns {void} - it returns nothing
    */
-  removeTokenFromLocalStorage() {
+  removeTokenFromLocalStorage(): void {
     localStorage.removeItem(
       REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
     );
@@ -82,9 +84,8 @@ export class SharedService {
   }
 
   /**
-   * This method updates the current status to show or disable loader, i.e. pushes a new value to the stream
-   *
-   * @param {{boolean}} status is the boolean that is updated, which is then received by all the subscribers
+   * This method updates the current token to show or disable some elements in the navigation and it's also used by admin-guard service, i.e. pushes a new value to the stream
+   * @param {{string}} token is the token that is updated, which is then received by all the subscribers
    * @returns {void} it returns nothing
    */
   updateToken(token: string): void {

@@ -96,7 +96,7 @@
   </div>
 </main>
 
-<div class="text-center">
+<div *ngIf="!productionEnvironment" class="text-center debugger">
   {{ signupForm.value | json }}
   {{ signupForm.status | json }}
 </div>

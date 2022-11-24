@@ -35,7 +35,7 @@ export class InterceptorService {
    *
    * @param {{HttpRequest<any>}} req  is the HTTP request that is being made from client
    * @param {{HttpHandler}} next is the next function to be called i.e. this function continues the HTTP request, after authorization token is added
-   * @returns
+   * @returns {Observable<HttpEvent<any>>}
    */
   intercept(
     req: HttpRequest<any>,

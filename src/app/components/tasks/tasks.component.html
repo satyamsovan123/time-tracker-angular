@@ -56,12 +56,17 @@
   </div>
 
   <div class="d-flex buttons">
-    <button type="button" class="custom-button btn btn-primary dark-button">
+    <button
+      (click)="addNewTime()"
+      type="button"
+      class="custom-button btn btn-primary dark-button"
+    >
       Add new timings
     </button>
 
     <button
       type="button"
+      (click)="saveChanges()"
       class="save-changes-button custom-button btn btn-primary dark-button"
     >
       Save changes

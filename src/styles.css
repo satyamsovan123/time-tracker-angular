@@ -181,7 +181,8 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  /* -webkit-box-shadow: 0 0 0 30px white inset !important; */
+  -webkit-box-shadow: 0 0 0 30px var(--light-theme) inset !important;
+  -webkit-text-fill-color: var(--dark-theme) !important;
 }
 
 @media (max-width: 768px) {
@@ -242,6 +243,11 @@ input:-webkit-autofill:active {
   input {
     width: 80px;
   }
+}
+
+.debugger {
+  color: var(--dark-theme);
+  font-weight: var(--semi-bold);
 }
 
 .clock-loader {

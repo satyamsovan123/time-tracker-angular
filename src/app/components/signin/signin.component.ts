@@ -13,6 +13,7 @@ import {
 import { BackendResponse } from 'src/app/models/backendResponse.model';
 import { Signin } from 'src/app/models/signin.model';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 /**
  * This component serves as the base component to be shown for signin component, it contains the logic for signing in
@@ -70,6 +71,14 @@ export class SigninComponent implements OnInit {
    * @type {string}
    */
   invalidLastName: string = FORM_CONSTANTS.INVALID_LASTNAME;
+
+  /**
+   * This variable holds true if the environment is production
+   * it's used for debugging purpose
+   *
+   * @type {boolean}
+   */
+  productionEnvironment: boolean = environment.production;
 
   constructor(
     private sharedService: SharedService,
