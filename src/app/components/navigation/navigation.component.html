@@ -67,7 +67,7 @@
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
+            <li *ngIf="currentTokenStatus" class="nav-item">
               <a
                 class="nav-link"
                 [routerLinkActive]="'current-active-navigation-item'"
@@ -77,7 +77,7 @@
                 >Current tasks</a
               >
             </li>
-            <li class="nav-item">
+            <li *ngIf="currentTokenStatus" class="nav-item">
               <a
                 class="nav-link"
                 [routerLinkActive]="'current-active-navigation-item'"
@@ -87,7 +87,7 @@
                 >Dashboard</a
               >
             </li>
-            <li class="nav-item dropdown">
+            <li *ngIf="!currentTokenStatus" class="nav-item dropdown">
               <a
                 class="nav-link"
                 [routerLinkActive]="'current-active-navigation-item'"
@@ -97,7 +97,7 @@
                 >Sign in</a
               >
             </li>
-            <li class="nav-item dropdown">
+            <li *ngIf="!currentTokenStatus" class="nav-item dropdown">
               <a
                 class="nav-link"
                 [routerLinkActive]="'current-active-navigation-item'"
@@ -111,29 +111,18 @@
               <a
                 class="nav-link"
                 [routerLinkActive]="'current-active-navigation-item'"
-                [routerLink]="'/error'"
-                aria-current="page"
-                data-bs-dismiss="offcanvas"
-                >Error</a
-              >
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link"
-                [routerLinkActive]="'current-active-navigation-item'"
                 [routerLink]="'/help'"
                 aria-current="page"
                 data-bs-dismiss="offcanvas"
                 >Help</a
               >
             </li>
-            <li class="nav-item dropdown">
+            <li *ngIf="currentTokenStatus" class="nav-item dropdown">
               <a
-                class="nav-link"
+                class="nav-link sign-out"
                 (click)="signOut()"
-                [routerLinkActive]="'current-active-navigation-item'"
-                [routerLink]="'/'"
                 aria-current="page"
+                data-bs-dismiss="offcanvas"
                 >Sign out</a
               >
             </li>
@@ -144,6 +133,7 @@
 
     <div class="desktop">
       <a
+        *ngIf="currentTokenStatus"
         class="nav-link"
         [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
         [routerLinkActive]="'current-active-navigation-item'"
@@ -152,6 +142,7 @@
         >Current tasks</a
       >
       <a
+        *ngIf="currentTokenStatus"
         class="nav-link"
         [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
         [routerLinkActive]="'current-active-navigation-item'"
@@ -160,6 +151,7 @@
         >Dashboard</a
       >
       <a
+        *ngIf="!currentTokenStatus"
         class="nav-link"
         [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
         [routerLinkActive]="'current-active-navigation-item'"
@@ -168,6 +160,7 @@
         >Sign in</a
       >
       <a
+        *ngIf="!currentTokenStatus"
         class="nav-link"
         [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
         [routerLinkActive]="'current-active-navigation-item'"
@@ -184,6 +177,7 @@
         >Help</a
       >
       <a
+        *ngIf="currentTokenStatus"
         class="nav-link sign-out"
         (click)="signOut()"
         [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"

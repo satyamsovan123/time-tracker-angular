@@ -40,6 +40,5 @@ export class HelpComponent implements OnInit {
   ngOnInit(): void {
     this.sharedService.updateStyle('light');
     this.helpData = this.generateHelpDataService.getHelpData();
-    this.loggerService.log(this.helpData);
   }
 }

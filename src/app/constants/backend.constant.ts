@@ -1,7 +1,6 @@
 export const API_CONSTANTS = {
   SIGNUP: '/signup',
   SIGNIN: '/signin',
-  SIGNOUT: '/signout',
   PROFILE: '/profile',
   TASK: '/task',
   INSIGHT: '/insight',
@@ -26,4 +25,7 @@ export const BACKEND_ACTION_CONSTANTS = {
 
   SIGNIN_SUCCESSFUL: 'Signin is successful!',
   SIGNIN_UNSUCCESSFUL: 'Unable to signin, please try again after sometime.',
+
+  SIGNOUT_SUCCESSFUL: 'Sign out is successful!',
+  SIGNOUT_UNSUCCESSFUL: 'Unable to sign out, please try again after sometime.',
 };

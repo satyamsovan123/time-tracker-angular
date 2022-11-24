@@ -21,6 +21,8 @@ export const COMMON_CONSTANTS = {
 
   LIGHT_THEME: 'light',
   DARK_THEME: 'dark',
+  PAGE_DOESNT_EXIST: "It seems like you have found a page that doesn't exist!",
+  COOKIE_CLEARED: "You've been signed out, please sign in again to continue.",
 };
 
 export const FORM_CONSTANTS = {

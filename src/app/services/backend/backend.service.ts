@@ -34,7 +34,8 @@ export class BackendService {
     this.loggerService.log(newUser);
     return this.httpClient.post(
       environment.backendURL + API_CONSTANTS.SIGNUP,
-      newUser
+      newUser,
+      { withCredentials: true, observe: 'response' }
     );
   }
 
@@ -51,20 +52,5 @@ export class BackendService {
       user,
       { withCredentials: true, observe: 'response' }
     );
-  }
-
-  /**
-   * This is a GET method, and it sends the server to send back the request to browser to clear cookies
-   * It removes the token stored in local storage as well
-   * @returns {{Observable<Object>}} an observable which will contain response from backend
-   */
-  signOut(): Observable<Object> {
-    localStorage.removeItem(
-      REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
-    );
-
-    return this.httpClient.get(environment.backendURL + API_CONSTANTS.SIGNOUT, {
-      withCredentials: true,
-    });
   }
 }

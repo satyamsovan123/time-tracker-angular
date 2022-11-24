@@ -234,7 +234,7 @@ export class SigninComponent implements OnInit {
            */
           this.toastrService.success(
             backendResponse.message ||
-              BACKEND_ACTION_CONSTANTS.SIGNUP_SUCCESSFUL
+              BACKEND_ACTION_CONSTANTS.SIGNIN_SUCCESSFUL
           );
 
           /**
@@ -248,20 +248,19 @@ export class SigninComponent implements OnInit {
           );
 
           /**
-           * Saving the access_token in local storage
-           * Updating the authentication status, by pushing true to the observer stream
+           * Removing the old access_token, saving the access_token in local storage
+           * Updating the access token value
            * Redirecting user to current tasks page
            */
-          localStorage.removeItem(
-            REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
-          );
+          this.sharedService.removeTokenFromLocalStorage();
 
+          this.sharedService.updateToken(accessToken);
           localStorage.setItem(
             REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN,
             accessToken
           );
-          this.sharedService.updateIsAuthenticated(true);
-          // this.router.navigateByUrl('/tasks');
+
+          this.router.navigateByUrl('/tasks');
         },
 
         /**

@@ -19,7 +19,7 @@ export class ErrorComponent implements OnInit {
    *
    * @type {string}
    */
-  errorMessage: string = 'Some error occured.';
+  errorMessage: string = COMMON_CONSTANTS.GENERIC_ERROR_MESSAGE;
   constructor(private sharedService: SharedService) {}
 
   /**
@@ -30,6 +30,6 @@ export class ErrorComponent implements OnInit {
    */
   ngOnInit(): void {
     this.sharedService.updateStyle('light');
-    this.errorMessage = COMMON_CONSTANTS.UNAUTHORIZED;
+    this.errorMessage = COMMON_CONSTANTS.PAGE_DOESNT_EXIST;
   }
 }

@@ -7,8 +7,13 @@ import { ToastrService } from 'ngx-toastr';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { Signup } from '../../models/signup.model';
 import { finalize } from 'rxjs/operators';
-import { BACKEND_ACTION_CONSTANTS } from 'src/app/constants/backend.constant';
+import {
+  BACKEND_ACTION_CONSTANTS,
+  REQUEST_RESPONSE_BODY_HEADER_CONSTANTS,
+} from 'src/app/constants/backend.constant';
 import { BackendResponse } from 'src/app/models/backendResponse.model';
+import { JwtService } from 'src/app/services/utils/jwt.service';
+import { Router } from '@angular/router';
 
 /**
  * This component serves as the base component to be shown for signup component, it contains the logic for signing up
@@ -71,7 +76,9 @@ export class SignupComponent implements OnInit {
     private sharedService: SharedService,
     private loggerService: LoggerService,
     private toastrService: ToastrService,
-    private backendService: BackendService
+    private backendService: BackendService,
+    private jwtService: JwtService,
+    private router: Router
   ) {}
 
   /**
@@ -229,7 +236,9 @@ export class SignupComponent implements OnInit {
            * @type {BackendResponse}
            * @const
            */
-          const backendResponse = new BackendResponse(response);
+          const backendResponse: BackendResponse = new BackendResponse(
+            response.body
+          );
 
           /**
            * Showing a success toastr with message either from backend or a static success message
@@ -238,7 +247,31 @@ export class SignupComponent implements OnInit {
             backendResponse.message ||
               BACKEND_ACTION_CONSTANTS.SIGNUP_SUCCESSFUL
           );
-          this.loggerService.log(backendResponse);
+
+          /**
+           * This is the token from backend that is received after successful authentication
+           *
+           * @type {string}
+           * @const
+           */
+          const accessToken: string = response.headers.get(
+            REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
+          );
+
+          /**
+           * Removing the old access_token, saving the access_token in local storage
+           * Updating the access token value
+           * Redirecting user to current tasks page
+           */
+          this.sharedService.removeTokenFromLocalStorage();
+
+          this.sharedService.updateToken(accessToken);
+          localStorage.setItem(
+            REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN,
+            accessToken
+          );
+
+          this.router.navigateByUrl('/dashboard');
         },
         /**
          * This method is called if the request made to backend was not successful
@@ -252,7 +285,9 @@ export class SignupComponent implements OnInit {
            * @type {BackendResponse}
            * @const
            */
-          const backendResponse = new BackendResponse(response.error);
+          const backendResponse: BackendResponse = new BackendResponse(
+            response.error
+          );
 
           /**
            * Showing a error toastr with message either from backend or a static error message

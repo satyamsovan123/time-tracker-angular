@@ -9,6 +9,12 @@ import { SignupComponent } from './components/signup/signup.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
 
+/**
+ * These are the route paths and guards
+ *
+ * @type {Route}
+ * @const
+ */
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
