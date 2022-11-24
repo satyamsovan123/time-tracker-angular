@@ -6,7 +6,10 @@ import { HttpHandler } from '@angular/common/http';
 import { HttpEvent } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { API_CONSTANTS } from 'src/app/constants/backend.constant';
+import {
+  API_CONSTANTS,
+  REQUEST_RESPONSE_BODY_HEADER_CONSTANTS,
+} from 'src/app/constants/backend.constant';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +21,19 @@ export class InterceptorService {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // req = req.clone({
-    //   withCredentials: true,
-    // });
+    console.log(
+      localStorage.getItem(REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN)
+    );
+
+    req = req.clone({
+      withCredentials: true,
+      setHeaders: {
+        access_token:
+          localStorage.getItem(
+            REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
+          ) || '',
+      },
+    });
     return next.handle(req);
   }
 }

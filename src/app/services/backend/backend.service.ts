@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Signup } from 'src/app/models/signup.model';
-import { API_CONSTANTS } from 'src/app/constants/backend.constant';
+import {
+  API_CONSTANTS,
+  REQUEST_RESPONSE_BODY_HEADER_CONSTANTS,
+} from 'src/app/constants/backend.constant';
 import { environment } from 'src/environments/environment';
 import { Signin } from 'src/app/models/signin.model';
 import { LoggerService } from '../utils/logger.service';
@@ -46,16 +49,20 @@ export class BackendService {
     return this.httpClient.post(
       environment.backendURL + API_CONSTANTS.SIGNIN,
       user,
-      { withCredentials: true }
+      { withCredentials: true, observe: 'response' }
     );
   }
 
   /**
    * This is a GET method, and it sends the server to send back the request to browser to clear cookies
-   *
+   * It removes the token stored in local storage as well
    * @returns {{Observable<Object>}} an observable which will contain response from backend
    */
   signOut(): Observable<Object> {
+    localStorage.removeItem(
+      REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
+    );
+
     return this.httpClient.get(environment.backendURL + API_CONSTANTS.SIGNOUT, {
       withCredentials: true,
     });

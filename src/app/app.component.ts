@@ -13,8 +13,12 @@ import { SharedService } from './services/utils/shared.service';
 })
 export class AppComponent implements OnInit {
   constructor(private sharedService: SharedService) {}
-  title = 'time-tracker';
-
+  /**
+   * This is the title for the application
+   *
+   * @type {string}
+   */
+  title: string = 'time-tracker';
   /**
    * This the variable that holds the status to either enable or disable background elements
    *

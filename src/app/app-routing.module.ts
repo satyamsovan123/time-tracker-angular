@@ -7,11 +7,20 @@ import { HomeComponent } from './components/home/home.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { TasksComponent } from './components/tasks/tasks.component';
+import { AuthenticationGuard } from './guards/authentication.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'tasks', component: TasksComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthenticationGuard],
+  },
+  {
+    path: 'tasks',
+    component: TasksComponent,
+    canActivate: [AuthenticationGuard],
+  },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'help', component: HelpComponent },

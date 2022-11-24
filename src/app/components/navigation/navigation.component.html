@@ -127,6 +127,16 @@
                 >Help</a
               >
             </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                (click)="signOut()"
+                [routerLinkActive]="'current-active-navigation-item'"
+                [routerLink]="'/'"
+                aria-current="page"
+                >Sign out</a
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -174,11 +184,9 @@
         >Help</a
       >
       <a
-        class="nav-link"
+        class="nav-link sign-out"
         (click)="signOut()"
         [ngClass]="currentBackground == 'dark' ? 'light-theme' : 'dark-theme'"
-        [routerLinkActive]="'current-active-navigation-item'"
-        [routerLink]="'/help'"
         aria-current="page"
         >Sign out</a
       >

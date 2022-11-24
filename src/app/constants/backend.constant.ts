@@ -12,7 +12,7 @@ export const REQUEST_RESPONSE_BODY_HEADER_CONSTANTS = {
   PASSWORD: 'password',
   FIRST_NAME: 'firstName',
   LAST_NAME: 'lastName',
-  AUTHORIZATION_TOKEN: 'X-Time-Tracker-Authorization-Token',
+  ACCESS_TOKEN: 'access_token',
   TASK_LIST: 'taskList',
   DATE_ADDED: 'dateAdded',
   START_TIME: 'startTime',

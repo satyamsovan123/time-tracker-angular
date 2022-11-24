@@ -6,7 +6,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { finalize } from 'rxjs/operators';
-import { BACKEND_ACTION_CONSTANTS } from 'src/app/constants/backend.constant';
+import {
+  BACKEND_ACTION_CONSTANTS,
+  REQUEST_RESPONSE_BODY_HEADER_CONSTANTS,
+} from 'src/app/constants/backend.constant';
 import { BackendResponse } from 'src/app/models/backendResponse.model';
 import { Signin } from 'src/app/models/signin.model';
 import { Router } from '@angular/router';
@@ -222,7 +225,9 @@ export class SigninComponent implements OnInit {
            * @type {BackendResponse}
            * @const
            */
-          const backendResponse = new BackendResponse(response);
+          const backendResponse: BackendResponse = new BackendResponse(
+            response.body
+          );
 
           /**
            * Showing a success toastr with message either from backend or a static success message
@@ -231,11 +236,31 @@ export class SigninComponent implements OnInit {
             backendResponse.message ||
               BACKEND_ACTION_CONSTANTS.SIGNUP_SUCCESSFUL
           );
-          this.loggerService.log(response);
 
           /**
+           * This is the token from backend that is received after successful authentication
+           *
+           * @type {string}
+           * @const
+           */
+          const accessToken: string = response.headers.get(
+            REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
+          );
+
+          /**
+           * Saving the access_token in local storage
+           * Updating the authentication status, by pushing true to the observer stream
            * Redirecting user to current tasks page
            */
+          localStorage.removeItem(
+            REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
+          );
+
+          localStorage.setItem(
+            REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN,
+            accessToken
+          );
+          this.sharedService.updateIsAuthenticated(true);
           // this.router.navigateByUrl('/tasks');
         },
 
@@ -251,7 +276,9 @@ export class SigninComponent implements OnInit {
            * @type {BackendResponse}
            * @const
            */
-          const backendResponse = new BackendResponse(response.error);
+          const backendResponse: BackendResponse = new BackendResponse(
+            response.error
+          );
 
           /**
            * Showing a error toastr with message either from backend or a static error message

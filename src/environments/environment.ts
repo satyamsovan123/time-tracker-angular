@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // backendURL: 'http://localhost:3000/api',
-  backendURL: 'https://time-tracker-api.onrender.com/api',
+  backendURL: 'http://localhost:3000/api',
+  // backendURL: 'https://time-tracker-api.onrender.com/api',
 };
 
 /*

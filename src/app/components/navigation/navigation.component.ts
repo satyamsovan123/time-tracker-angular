@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { REQUEST_RESPONSE_BODY_HEADER_CONSTANTS } from 'src/app/constants/backend.constant';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { LoggerService } from 'src/app/services/utils/logger.service';
 import { SharedService } from 'src/app/services/utils/shared.service';
@@ -49,8 +50,11 @@ export class NavigationComponent implements OnInit {
    * @returns {void} it returns nothing
    */
   signOut(): void {
-    this.backendService.signOut().subscribe((response) => {
-      console.log(response);
-    });
+    if (
+      localStorage.getItem(REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN)
+    )
+      this.backendService.signOut().subscribe((response) => {
+        console.log(response);
+      });
   }
 }
