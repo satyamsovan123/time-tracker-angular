@@ -218,9 +218,11 @@ export class SignupComponent implements OnInit {
       password: this.signupForm.value.password,
       firstName: this.signupForm.value.firstName
         .toLowerCase()
+        .replace(' ', '')
         .replace(/\b\w/g, (firstName: string) => firstName.toUpperCase()),
       lastName: this.signupForm.value.lastName
         .toLowerCase()
+        .replace(' ', '')
         .replace(/\b\w/g, (lastName: string) => lastName.toUpperCase()),
     };
 
