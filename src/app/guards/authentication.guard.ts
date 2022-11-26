@@ -52,18 +52,18 @@ export class AuthenticationGuard implements CanActivate {
      * This is done in order to handle the scenario, where user manually deletes the auth cookie
      * Showing a success toastr with message a static success message
      */
-    if (
-      !this.jwtService.validateJWT(
-        localStorage.getItem(
-          REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
-        ) || ''
-      )
-    ) {
-      this.sharedService.updateToken('');
+    // if (
+    //   !this.jwtService.validateJWT(
+    //     localStorage.getItem(
+    //       REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
+    //     ) || ''
+    //   )
+    // ) {
+    //   this.sharedService.updateToken('');
 
-      this.toastrService.info(COMMON_CONSTANTS.COOKIE_CLEARED);
-      return false;
-    }
+    //   this.toastrService.info(COMMON_CONSTANTS.COOKIE_CLEARED);
+    //   return false;
+    // }
 
     /**
      * Checking if the token is valid, then returing true, else returning false

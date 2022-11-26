@@ -1,5 +1,5 @@
 <main>
-  <div class="main-form overflow">
+  <div class="main-form overflow-table">
     <table class="table table-borderless">
       <thead>
         <tr>
@@ -12,18 +12,34 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let task of taskList; let index = index">
           <td>
-            <input type="time" class="form-control" id="" />
+            <input
+              type="time"
+              class="form-control"
+              name="startTime{{ index }}"
+              [(ngModel)]="task.startTime"
+            />
           </td>
           <td>
-            <input type="time" class="form-control" id="" />
+            <input
+              type="time"
+              class="form-control"
+              name="endTime{{ index }}"
+              [(ngModel)]="task.endTime"
+            />
           </td>
           <td>
-            <input type="number" class="form-control" id="" />
+            <input
+              type="number"
+              class="form-control"
+              name="timeUsed{{ index }}"
+              [(ngModel)]="task.timeUsed"
+            />
           </td>
           <td>
             <svg
+              (click)="deleteTiming(index)"
               id="delete-button"
               width="58px"
               height="77px"

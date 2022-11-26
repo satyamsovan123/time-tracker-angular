@@ -162,7 +162,7 @@ export class SignupComponent implements OnInit {
      * Checking if the form status is "INVALID", then calling the toastr service and showing the error message, else setting the validation value as true, and then returning the value
      */
     if (this.signupForm.status === FORM_CONSTANTS.INVALID_FORM_STATUS) {
-      this.toastrService.error(FORM_CONSTANTS.INVALID_FIELDS_IN_FORM);
+      this.toastrService.error(FORM_CONSTANTS.INVALID_FORM);
     } else {
       validationStatus = true;
     }

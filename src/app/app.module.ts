@@ -9,6 +9,7 @@ import {
   HttpHeaders,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,6 +40,7 @@ import { LoaderComponent } from './components/shared/loader/loader.component';
     LoaderComponent,
   ],
   imports: [
+    FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,

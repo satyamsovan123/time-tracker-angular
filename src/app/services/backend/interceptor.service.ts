@@ -12,12 +12,17 @@ import {
 } from 'src/app/constants/backend.constant';
 import { LoggerService } from '../utils/logger.service';
 import { SharedService } from '../utils/shared.service';
+import { JwtService } from '../utils/jwt.service';
+import { ToastrService } from 'ngx-toastr';
+import { COMMON_CONSTANTS } from 'src/app/constants/common.constant';
 
 /**
  * This service is used to intercept each HTTP request and the add authorization details and then send the request
  *
  * @requires {@link JwtService}
  * @requires {@link SharedService}
+ * @requires {@link JwtService}
+ * @requires {@link ToastrService}
  * @requires {@link LoggerService}
  *
  */
@@ -28,7 +33,9 @@ export class InterceptorService {
   constructor(
     private router: Router,
     private loggerService: LoggerService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private jwtService: JwtService,
+    private toastrService: ToastrService
   ) {}
 
   /**
@@ -41,6 +48,17 @@ export class InterceptorService {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    /**
+     * Checking if the user doesn't have a valid access_token, before every API call, then sending user to signin page
+     * This is done in order to handle the scenario, where user manually deletes the auth cookie
+     */
+    const isValidTokenPresent = this.jwtService.validateJWT(
+      this.sharedService.getTokenFromLocalStorage()
+    );
+    if (!isValidTokenPresent) {
+      // this.toastrService.info(COMMON_CONSTANTS.FORCE_SIGNED_OUT);
+      this.router.navigateByUrl('/signin');
+    }
     /**
      * Credentials is set to true, as sometimes, frontend and backend needs to send authorization related information, and the name for the custom header request is "access_token"
      */

@@ -250,6 +250,30 @@ input:-webkit-autofill:active {
   font-weight: var(--semi-bold);
 }
 
+.modal-header {
+  border-bottom: var(--dark-theme) 2px solid;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+.modal-backdrop {
+  pointer-events: none;
+  background-color: var(--light-theme) !important;
+  filter: blur(10px) !important;
+  opacity: 0.8 !important;
+  /* z-index: -111111 !important; */
+}
+
+.modal-content {
+  border: var(--dark-theme) 2px solid;
+  background-color: var(--light-theme);
+  border-radius: var(--border-radius);
+  min-height: 200px;
+  box-shadow: var(--box-shadow);
+}
+
 .clock-loader {
   position: absolute;
   z-index: 1111;
@@ -296,6 +320,7 @@ input:-webkit-autofill:active {
   filter: blur(10px);
   opacity: 0.3;
   z-index: -1111;
+  transition: opacity 0.15s linear;
 }
 
 .toast-container .ngx-toastr {

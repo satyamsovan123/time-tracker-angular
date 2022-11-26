@@ -2,9 +2,9 @@ main {
   margin-top: var(--margin-top);
 }
 
-.overflow {
-  overflow-x: scroll;
-  overflow-y: scroll;
+.overflow-table {
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 .main-form {

@@ -4,8 +4,6 @@ export const COMMON_CONSTANTS = {
   GENERIC_ERROR_MESSAGE: 'Some error occured, please try again.',
   INVALID_CREDENTIALS:
     'The entered credentials are invalid, please try again with correct credentials.',
-  INVALID_FORM:
-    'There are some discripany with the entered data, please correct them and resubmit.',
   UNABLE_TO_GET_DATA:
     'We are unable to fetch data from our server, sorry for the inconvinience. Try again later.',
   UNABLE_TO_UPDATE_DATA:
@@ -22,15 +20,22 @@ export const COMMON_CONSTANTS = {
   LIGHT_THEME: 'light',
   DARK_THEME: 'dark',
   PAGE_DOESNT_EXIST: "It seems like you have found a page that doesn't exist!",
-  COOKIE_CLEARED: "You've been signed out, please sign in again to continue.",
+  FORCE_SIGNED_OUT: "You've been signed out, please sign in again to continue.",
 };
 
 export const FORM_CONSTANTS = {
   INVALID_FORM_STATUS: 'INVALID',
   VALID_FORM_STATUS: 'VALID',
-  INVALID_FIELDS_IN_FORM: 'Some fields in the form are invalid.',
+  INVALID_FORM:
+    'There are some discripanies with the entered data, please correct them and resubmit.',
+  // INVALID_FIELDS_IN_FORM: 'Some fields in the form are invalid.',
   INVALID_EMAIL: 'Email is invalid',
   INVALID_PASSWORD: 'Password is invalid',
   INVALID_FIRSTNAME: 'First name is invalid',
   INVALID_LASTNAME: 'Last name is invalid',
+
+  INVALID_START_TIME: 'Start time is invalid',
+  INVALID_END_TIME: 'End time is invalid',
+  INVALID_TIME_USED: 'Time used is invalid',
+  FOR_ROW: 'for row',
 };

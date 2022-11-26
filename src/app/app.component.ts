@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { SharedService } from './services/utils/shared.service';
 
 /**
@@ -11,8 +17,16 @@ import { SharedService } from './services/utils/shared.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
-  constructor(private sharedService: SharedService) {}
+export class AppComponent implements OnInit, AfterContentChecked {
+  constructor(
+    private sharedService: SharedService,
+    private cdRef: ChangeDetectorRef
+  ) {}
+
+  ngAfterContentChecked(): void {
+    this.cdRef.detectChanges();
+  }
+
   /**
    * This is the title for the application
    *

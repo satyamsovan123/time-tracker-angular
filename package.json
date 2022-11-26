@@ -23,6 +23,7 @@
     "@auth0/angular-jwt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "chartjs-plugin-datalabels": "^2.1.0",
+    "moment": "^2.29.4",
     "ng2-charts": "3.1",
     "ngx-toastr": "^15.0.0",
     "rxjs": "~7.5.0",

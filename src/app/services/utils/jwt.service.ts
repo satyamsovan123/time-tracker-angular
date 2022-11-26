@@ -30,7 +30,6 @@ export class JwtService {
     if (!token) {
       return status;
     }
-
     /**
      * Checking if token is not expired, then updating the status to true, else removing the expired token from local storage (by calling another method), i.e. forcing user to sign in again
      */

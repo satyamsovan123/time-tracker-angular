@@ -1,50 +1,128 @@
 <main>
-  <div class="welcome">
-    <h1>Hello, Jon Doe.</h1>
-    <p>
-      It looks like you've been working hard. Lorem ipsum dolor sit amet
-      consectetur, adipisicing elit. You can view your data below. You can
-      delete your data entirely if you want, however, this is non reversible. To
-      delete data click <span class="delete-account">here</span>.
+  <section class="welcome">
+    <h1 *ngIf="!currentName">Hello!</h1>
+    <h1 *ngIf="currentName">Hello, {{ currentName }}.</h1>
+    <p *ngIf="!insights.length">
+      It looks like you've not added any data yet. Click
+      <span [routerLink]="'/tasks'" class="hyperlink">here</span> to go to the
+      current tasks section to add new data for today. After that, you can view
+      your data below. The chart below shows your progress. You can delete any
+      insights, and you can also delete your profile entirely if you want,
+      however, this is a non reversible action. To delete your profile, click
+      <span
+        data-bs-toggle="modal"
+        data-bs-target="#deleteModal"
+        class="hyperlink"
+        >here</span
+      >. If you want any help, click
+      <span [routerLink]="'/help'" class="hyperlink">here</span>
+      to go to the help section.
     </p>
-  </div>
+    <p *ngIf="insights.length">
+      It looks like you've been working hard. You can view your data below. The
+      chart at the last shows your progress. You can delete any insights, and
+      you can also delete your profile entirely if you want, however, this is a
+      non reversible action. To delete your profile, click
+      <span
+        data-bs-toggle="modal"
+        data-bs-target="#deleteModal"
+        class="hyperlink"
+        >here</span
+      >. If you want any help, click
+      <span [routerLink]="'/help'" class="hyperlink">here</span>
+      to go to the help section.
+    </p>
+  </section>
 
-  <div class="insights">
-    <div class="accordion" id="accordionParent">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
+  <div
+    class="modal fade"
+    id="deleteModal"
+    tabindex="-1"
+    aria-labelledby="deleteConfirmationModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <p class="modal-title" id="deleteConfirmationModal">Are you sure?</p>
           <button
-            class="accordion-button"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseOne"
-            aria-expanded="true"
-            aria-controls="collapseOne"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">{{ deleteConfirmationMessage }}</div>
+        <div class="modal-footer">
+          <button
+            class="custom-button btn btn-primary dark-button"
+            type="button"
+            data-bs-dismiss="modal"
           >
-            Summary for date - 08/11/2022
+            Close
           </button>
-        </h2>
-        <div
-          id="collapseOne"
-          class="accordion-collapse collapse show"
-          aria-labelledby="headingOne"
-          data-bs-parent="#accordionParent"
-        >
-          <div class="accordion-body">
-            <p>On 08/11/2022, you have logged for 3 hours.</p>
-            <button
-              type="button"
-              class="mt-3 custom-button btn btn-primary dark-button"
-            >
-              Delete this data
-            </button>
-          </div>
+          <button
+            type="button"
+            class="custom-button btn btn-primary dark-button"
+            data-bs-dismiss="modal"
+          >
+            Yes, delete my account
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="chart overflow">
+  <section class="insights">
+    <div *ngFor="let insight of insights; let index = index">
+      <div class="accordion" id="accordionParent">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              attr.data-bs-target="#collapseOne{{ index }}"
+              attr.aria-expanded="{{
+                index === insights.length - 1 ? true : false
+              }}"
+              attr.aria-controls="collapseOne{{ index }}"
+            >
+              Summary for date -
+              {{ this.convertStringToDate(insight.dateAdded) }}
+            </button>
+          </h2>
+          <div
+            attr.id="collapseOne{{ index }}"
+            [ngClass]="{ show: index === insights.length - 1 }"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionParent"
+          >
+            <div class="accordion-body">
+              <p>
+                On {{ this.convertStringToDate(insight.dateAdded) }}, you have
+                logged {{ insight.totalTimeLogged | number: "2.0-2" }} hours of
+                time, out of which you have used
+                {{ insight.timeUsed | number }} hours. Also, you've utilized
+                {{ insight.percentage | number: "2.0-2" }}
+                of the time efficiently. {{ insight.comment }}
+              </p>
+              <button
+                type="button"
+                (click)="deleteInsight(index)"
+                class="mt-3 custom-button btn btn-primary dark-button"
+              >
+                Delete this data
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chart overflow">
     <canvas
       baseChart
       [data]="barChartData"
@@ -53,5 +131,5 @@
       [type]="barChartType"
     >
     </canvas>
-  </div>
+  </section>
 </main>

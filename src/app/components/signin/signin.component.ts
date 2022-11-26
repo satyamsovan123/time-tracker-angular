@@ -153,7 +153,7 @@ export class SigninComponent implements OnInit {
      * Checking if the form status is "INVALID", then calling the toastr service and showing the error message, else setting the validation value as true, and then returning the value
      */
     if (this.signinForm.status === FORM_CONSTANTS.INVALID_FORM_STATUS) {
-      this.toastrService.error(FORM_CONSTANTS.INVALID_FIELDS_IN_FORM);
+      this.toastrService.error(FORM_CONSTANTS.INVALID_FORM);
     } else {
       validationStatus = true;
     }
@@ -259,6 +259,7 @@ export class SigninComponent implements OnInit {
           /**
            * Removing the old access_token, saving the access_token in local storage
            * Updating the access token value
+           * Adding the email to local storage, for further use
            * Redirecting user to current tasks page
            */
           this.sharedService.removeTokenFromLocalStorage();
@@ -269,6 +270,11 @@ export class SigninComponent implements OnInit {
             accessToken
           );
 
+          localStorage.setItem(
+            REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.EMAIL,
+            user.email
+          );
+
           this.router.navigateByUrl('/tasks');
         },
 
@@ -277,7 +283,7 @@ export class SigninComponent implements OnInit {
          *
          * @param response is the response from backend
          */
-        error: (response) => {
+        error: (response: any) => {
           /**
            * This is the response from backend that is mapped using the BackendResponse model
            *

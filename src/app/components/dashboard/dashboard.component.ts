@@ -1,10 +1,32 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  HostListener,
+  AfterViewInit,
+} from '@angular/core';
+import {
+  ChartConfiguration,
+  ChartData,
+  ChartType,
+  Chart,
+  Point,
+} from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { SharedService } from 'src/app/services/utils/shared.service';
 import { LoggerService } from 'src/app/services/utils/logger.service';
+import { BackendService } from 'src/app/services/backend/backend.service';
+import { finalize } from 'rxjs/operators';
+import { BackendResponse } from 'src/app/models/backendResponse.model';
+import { ToastrService } from 'ngx-toastr';
+import { BACKEND_ACTION_CONSTANTS } from 'src/app/constants/backend.constant';
+import { COMMON_CONSTANTS } from 'src/app/constants/common.constant';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
+import { DashboardChartConfiguration } from 'src/app/configs/chart.config';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,10 +34,33 @@ import { LoggerService } from 'src/app/services/utils/logger.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  constructor(
+    private sharedService: SharedService,
+    private loggerService: LoggerService,
+    private backendService: BackendService,
+    private toastrService: ToastrService,
+    private router: Router
+  ) {
+    this.onResize();
+  }
+
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   screenHeight: number = 0;
   screenWidth: number = 0;
+  deleteConfirmationMessage: string = '';
+  insights: any = [];
+  currentName: string = '';
+
+  public barChartOptions: ChartConfiguration['options'] =
+    DashboardChartConfiguration;
+
+  public barChartType: ChartType = 'bar';
+  public barChartPlugins = [DataLabelsPlugin];
+
+  public barChartData: ChartData<'bar'> = {
+    datasets: [],
+  };
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -29,160 +74,143 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.deleteConfirmationMessage =
+      COMMON_CONSTANTS.DELETE_ACCOUNT_CONFIRMATION;
     this.sharedService.updateStyle('light');
+    this.sharedService.updateLoaderStatus(true);
+
+    try {
+      const getProfileResult: any = await this.backendService.getProfile();
+
+      this.currentName =
+        getProfileResult.data.firstName + ' ' + getProfileResult.data.lastName;
+
+      const getInsightsResult: any = await this.backendService.getInsights();
+      this.insights = getInsightsResult.data;
+
+      console.log(this.insights, getProfileResult);
+      this.generateGraphData();
+
+      this.sharedService.updateLoaderStatus(false);
+    } catch (response: any) {
+      this.sharedService.updateLoaderStatus(false);
+
+      this.toastrService.error(
+        response.message ||
+          BACKEND_ACTION_CONSTANTS.TIMESHEET_UPDATION_UNSUCCESSFUL
+      );
+    }
   }
 
-  constructor(
-    private sharedService: SharedService,
-    private loggerService: LoggerService
-  ) {
-    this.onResize();
+  deleteAccount(): void {
+    this.sharedService.updateLoaderStatus(true);
+
+    this.backendService
+      .deleteAccount()
+      .pipe(
+        finalize(() => {
+          /**
+           * Setting the loader status to false, on succesful completion of backend call or on on unsuccesful completion of backend call
+           */
+          this.sharedService.updateLoaderStatus(false);
+        })
+      )
+      .subscribe({
+        next: (response: any) => {
+          const backendResponse: BackendResponse = new BackendResponse(
+            response
+          );
+
+          this.toastrService.error(
+            backendResponse.message ||
+              BACKEND_ACTION_CONSTANTS.ACCOUNT_DELETION_SUCCESSFUL
+          );
+        },
+        error: (response) => {
+          const backendResponse: BackendResponse = new BackendResponse(
+            response
+          );
+
+          this.toastrService.error(
+            backendResponse.message ||
+              BACKEND_ACTION_CONSTANTS.ACCOUNT_DELETION_UNSUCCESSFUL
+          );
+        },
+      });
+    this.sharedService.removeTokenFromLocalStorage();
+    this.sharedService.updateToken('');
+    this.router.navigateByUrl('/signin');
+
+    // this.backendService.s
   }
 
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
+  generateGraphData(): void {
+    const yAxisHoursData: [] | any = [];
+    const xAxisDateData: [] | any = [];
 
-    scales: {
-      x: {
-        title: {
-          padding: 10,
-          display: window.innerWidth > 500,
-          text: 'Dates',
-          font: {
-            size: 15,
-            family:
-              '-apple-system, BlinkMacSystemFont, "Inter", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-            weight: '400',
-          },
-          color: '#ee7b39',
-          align: 'center',
-        },
-        ticks: {
-          maxRotation: 90,
-          minRotation: 90,
-          color: '#ee7b39',
-          font: {
-            size: 15,
-            family:
-              '-apple-system, BlinkMacSystemFont, "Inter", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-            weight: '400',
-          },
-        },
-        grid: {
-          color: '#ee7b39',
-          lineWidth: 0.2,
-        },
-      },
-      y: {
-        title: {
-          padding: 10,
-          display: window.innerWidth > 500,
-          text: 'Hours used',
-          font: {
-            size: 15,
-            family:
-              '-apple-system, BlinkMacSystemFont, "Inter", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-            weight: '400',
-          },
-          color: '#ee7b39',
-          align: 'center',
-        },
-        min: 0,
-        max: 24,
-        ticks: {
-          stepSize: 2,
-          color: '#ee7b39',
-          font: {
-            size: 15,
-            family:
-              '-apple-system, BlinkMacSystemFont, "Inter", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-            weight: '400',
-          },
-        },
-        grid: {
-          color: '#ee7b39',
-          lineWidth: 0.2,
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        display: false,
-        labels: {
-          font: {
-            size: 15,
-            family:
-              '-apple-system, BlinkMacSystemFont, "Inter", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-            weight: '400',
-          },
-        },
-      },
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-        color: '#ee7b39',
-        font: {
-          size: 15,
-          family:
-            '-apple-system, BlinkMacSystemFont, "Inter", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-        },
-      },
-      tooltip: {
-        backgroundColor: '#000000',
-        titleColor: '#fef7ea',
-        bodySpacing: 10,
-        padding: 10,
-        bodyColor: '#ee7b39',
-        bodyFont: {
-          size: 15,
-          family:
-            '-apple-system, BlinkMacSystemFont, "Inter", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-          weight: '400',
-        },
-        titleFont: {
-          size: 15,
-          family:
-            '-apple-system, BlinkMacSystemFont, "Inter", Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-          weight: '400',
-        },
-        titleMarginBottom: 15,
-        cornerRadius: 5,
-      },
-    },
-  };
-  public barChartType: ChartType = 'bar';
-  public barChartPlugins = [DataLabelsPlugin];
+    this.insights.forEach((insight: {} | any) => {
+      xAxisDateData.push(this.convertStringToDate(insight.dateAdded));
+      yAxisHoursData.push(insight.timeUsed);
+    });
 
-  public barChartData: ChartData<'bar'> = {
-    labels: [
-      '02/11/2022',
-      '03/11/2022',
-      '05/11/2022',
-      '07/11/2022',
-      '09/11/2022',
-      '10/11/2022',
-      '11/11/2022',
-      '16/11/2022',
-      '17/11/2022',
-      '18/11/2022',
-      '19/11/2022',
-      '20/11/2022',
-      '21/11/2022',
-      '25/11/2022',
-      '26/11/2022',
-      '27/11/2022',
-    ],
-    datasets: [
-      {
-        data: [11, 5, 1, 0.1, 2, 14, 2.3, 8.34, 11, 14, 2, 19, 1.2, 2, 14, 3],
-        label: 'Total hours used',
-        borderColor: '#ee7b39',
-        backgroundColor: '#ee7b39',
-        borderRadius: 5,
-        maxBarThickness: 50,
-        hoverBackgroundColor: '#ee7b39',
-      },
-    ],
-  };
+    const data: ChartData<'bar'> = {
+      labels: xAxisDateData,
+      datasets: [
+        {
+          data: yAxisHoursData,
+          label: 'Total hours logged',
+          borderColor: '#ee7b39',
+          backgroundColor: '#ee7b39',
+          borderRadius: 5,
+          maxBarThickness: 50,
+          hoverBackgroundColor: '#ee7b39',
+        },
+      ],
+    };
+    this.barChartData = data;
+  }
+
+  convertStringToDate(timeInUTCString: any) {
+    const localTime = moment.utc(timeInUTCString).local().format('DD/MM/YYYY');
+    return localTime;
+  }
+
+  deleteInsight(index: number): void {
+    this.sharedService.updateLoaderStatus(true);
+
+    this.backendService
+      .deleteInsight(this.insights[index].dateAdded)
+      .pipe(
+        finalize(() => {
+          /**
+           * Setting the loader status to false, on succesful completion of backend call or on on unsuccesful completion of backend call
+           */
+          this.sharedService.updateLoaderStatus(false);
+          this.insights.splice(index, 1);
+        })
+      )
+      .subscribe({
+        next: (response: any) => {
+          const backendResponse: BackendResponse = new BackendResponse(
+            response
+          );
+
+          this.toastrService.error(
+            backendResponse.message ||
+              BACKEND_ACTION_CONSTANTS.INSIGHT_DELETION_SUCCESSFUL
+          );
+        },
+        error: (response) => {
+          const backendResponse: BackendResponse = new BackendResponse(
+            response
+          );
+
+          this.toastrService.error(
+            backendResponse.message ||
+              BACKEND_ACTION_CONSTANTS.INSIGHT_DELETION_UNSUCCESSFUL
+          );
+        },
+      });
+  }
 }
