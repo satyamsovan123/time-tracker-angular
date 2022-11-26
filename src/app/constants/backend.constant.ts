@@ -22,33 +22,35 @@ export const REQUEST_RESPONSE_BODY_HEADER_CONSTANTS = {
 };
 
 export const BACKEND_ACTION_CONSTANTS = {
-  SIGNUP_SUCCESSFUL: 'Signup is successful!',
-  SIGNUP_UNSUCCESSFUL: 'Unable to signup, please try again after sometime.',
+  SIGNUP_SUCCESSFUL: 'You are now ready to take control of your time!',
+  SIGNUP_UNSUCCESSFUL:
+    'Sorry, we are unable to sign you up. Please try again after some time.',
+  SIGNIN_SUCCESSFUL: 'Sign in was successful.',
+  SIGNIN_UNSUCCESSFUL:
+    'Sorry, we are unable to take you to your dashboard. Please try again after some time.',
 
-  SIGNIN_SUCCESSFUL: 'Signin is successful!',
-  SIGNIN_UNSUCCESSFUL: 'Unable to signin, please try again after sometime.',
+  SIGNOUT_SUCCESSFUL: 'Sign out was successful.',
+  SIGNOUT_UNSUCCESSFUL:
+    'Sorry, we are unable to sign you out. Please try again after some time.',
 
-  SIGNOUT_SUCCESSFUL: 'Sign out is successful!',
-  SIGNOUT_UNSUCCESSFUL: 'Unable to sign out, please try again after sometime.',
-
-  TIMESHEET_UPDATION_SUCCESSFUL: 'Time sheet is updated!',
+  TIMESHEET_UPDATION_SUCCESSFUL: 'The time sheet is updated.',
   TIMESHEET_UPDATION_UNSUCCESSFUL:
-    'Unable to update time sheet, please try again after sometime.',
+    'Sorry, we are unable to update your timesheet. Please try again after some time.',
 
   UNABLE_TO_FETCH_TIMESHEET:
-    'Unable to get time sheet, please try again after sometime.',
+    'Sorry, we are unable to get your timesheet. Please try again after some time.',
 
   UNABLE_TO_FETCH_INSIGHTS:
-    'Unable to get insights, please try again after sometime.',
+    'Sorry, we are unable to generate insights for you. Please try again after some time.',
 
-  ACCOUNT_DELETION_SUCCESSFUL: 'Account deleted successfully!',
+  ACCOUNT_DELETION_SUCCESSFUL:
+    'Your account is deleted. And, we are sad to see you go.',
   ACCOUNT_DELETION_UNSUCCESSFUL:
-    'Unable to delete account, please try again after sometime.',
+    'Sorry, we are unable to delete your account. Please try again after some time.',
 
   UNABLE_TO_FETCH_PROFILE:
-    'Unable to get your account details, please try again after sometime.',
-
-  INSIGHT_DELETION_SUCCESSFUL: 'Insight deleted successfully!',
+    'Sorry, we are unable to get your account details. Please try again after some time.',
+  INSIGHT_DELETION_SUCCESSFUL: 'Insight for the date is deleted successfully.',
   INSIGHT_DELETION_UNSUCCESSFUL:
-    'Unable to delete insight, please try again after sometime.',
+    'Sorry, we are unable to delete that insight. Please try again after some time.',
 };

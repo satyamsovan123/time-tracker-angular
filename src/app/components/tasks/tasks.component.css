@@ -57,6 +57,14 @@ th {
   font-weight: var(--regular) !important;
 }
 
+tr {
+  text-align-last: left;
+}
+
+.td-width {
+  width: 40% !important;
+}
+
 .scrollable-view {
   overflow-x: scroll;
 }
@@ -67,7 +75,7 @@ th {
 
 @media (max-width: 991px) {
   input {
-    width: 80%;
+    width: 100%;
   }
 }
 
@@ -88,12 +96,16 @@ th {
     width: 50%;
   }
 
-  .save-changes-button {
+  .save-changes-button,
+  .clear-tasks-buttton {
     margin-left: 2%;
   }
 }
 
 @media (max-width: 500px) {
+  .time-used-input {
+    width: 120%;
+  }
   .main-form {
     margin-top: 10%;
   }
@@ -107,7 +119,7 @@ th {
   }
 
   input {
-    width: 100%;
+    width: 110%;
   }
 
   .custom-button {

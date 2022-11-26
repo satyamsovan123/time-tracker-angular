@@ -16,6 +16,7 @@ import { SharedService } from '../services/utils/shared.service';
 export class AuthenticationGuard implements CanActivate {
   /**
    * This is the boolean value for signed in, default value is false, this is requried to enable or disable some navigation menu items
+   * There are two nested observable calls here.
    *
    * @type {boolean}
    */
@@ -30,14 +31,24 @@ export class AuthenticationGuard implements CanActivate {
   canActivate(): any {
     this.sharedService.currentToken.subscribe((token) => {
       this.currentTokenStatus = this.jwtService.validateJWT(token);
-      /**
-       * Checking if the token is valid, then returing true, else navigating to /signin page and returning false
-       */
-      if (this.currentTokenStatus) {
-        return true;
-      }
-      this.router.navigateByUrl('/signin');
-      return false;
+
+      this.sharedService.currentEmail.subscribe((email) => {
+        /**
+         * Checking if email is present
+         */
+        if (email.length !== 0) {
+          /**
+           * Checking if the token is valid, then returing true, else navigating to /signin page and returning false
+           */
+          if (this.currentTokenStatus) {
+            return true;
+          }
+          this.router.navigateByUrl('/signin');
+          return false;
+        }
+        this.router.navigateByUrl('/signin');
+        return false;
+      });
     });
   }
 }

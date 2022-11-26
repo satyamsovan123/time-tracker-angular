@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { REQUEST_RESPONSE_BODY_HEADER_CONSTANTS } from 'src/app/constants/backend.constant';
+import { SharedService } from './shared.service';
 const helper = new JwtHelperService();
 
 /**
@@ -10,6 +12,8 @@ const helper = new JwtHelperService();
   providedIn: 'root',
 })
 export class JwtService {
+  constructor(private router: Router, private sharedService: SharedService) {}
+
   /**
    * This method helps to verify the JWT and check if JWT is expired
    *
@@ -36,9 +40,14 @@ export class JwtService {
     if (!helper.isTokenExpired(token)) {
       status = true;
     } else {
+      this.sharedService.updateToken('');
       localStorage.removeItem(
         REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN
       );
+      localStorage.removeItem(REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.EMAIL);
+
+      this.sharedService.updateToken('');
+      this.router.navigateByUrl('/signin');
     }
     return status;
   }

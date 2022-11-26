@@ -274,7 +274,8 @@ export class SignupComponent implements OnInit {
 
           /**
            * Removing the old access_token, saving the access_token in local storage
-           * Updating the access token value
+           * Updating the access token value and email
+           * Adding the email to local storage, for further use
            * Redirecting user to current tasks page
            */
           this.sharedService.removeTokenFromLocalStorage();
@@ -283,6 +284,12 @@ export class SignupComponent implements OnInit {
           localStorage.setItem(
             REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.ACCESS_TOKEN,
             accessToken
+          );
+          this.sharedService.updateEmail(newUser.email);
+
+          localStorage.setItem(
+            REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.EMAIL,
+            newUser.email
           );
 
           this.router.navigateByUrl('/dashboard');

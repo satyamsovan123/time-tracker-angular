@@ -48,7 +48,7 @@ import { LoaderComponent } from './components/shared/loader/loader.component';
     NgChartsModule.forRoot({ defaults: {} }),
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: 5000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       closeButton: true,

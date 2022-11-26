@@ -257,7 +257,7 @@ export class SigninComponent implements OnInit {
 
           /**
            * Removing the old access_token, saving the access_token in local storage
-           * Updating the access token value
+           * Updating the access token value and email
            * Adding the email to local storage, for further use
            * Redirecting user to current tasks page
            */
@@ -273,7 +273,7 @@ export class SigninComponent implements OnInit {
             REQUEST_RESPONSE_BODY_HEADER_CONSTANTS.EMAIL,
             user.email
           );
-
+          this.sharedService.updateEmail(user.email);
           this.router.navigateByUrl('/tasks');
         },
 

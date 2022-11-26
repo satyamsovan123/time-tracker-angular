@@ -198,8 +198,7 @@ export class DashboardComponent implements OnInit {
       this.sharedService.updateLoaderStatus(false);
 
       this.toastrService.error(
-        response.message ||
-          BACKEND_ACTION_CONSTANTS.TIMESHEET_UPDATION_UNSUCCESSFUL
+        BACKEND_ACTION_CONSTANTS.UNABLE_TO_FETCH_PROFILE
       );
     }
   }

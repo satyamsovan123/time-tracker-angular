@@ -5,6 +5,8 @@ import { SharedService } from 'src/app/services/utils/shared.service';
 import { Task } from 'src/app/models/task.model';
 import { finalize } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
 import {
   COMMON_CONSTANTS,
   FORM_CONSTANTS,
@@ -48,6 +50,34 @@ export class TasksComponent implements OnInit {
   taskList: Task[] | any = [];
 
   /**
+   * This is tip for time used field
+   *
+   * @type {string}
+   */
+  timeUsedInputTip: string = FORM_CONSTANTS.TIME_USED_TIP;
+
+  /**
+   * This is tip for start time
+   *
+   * @type {string}
+   */
+  startTimeInputTip: string = FORM_CONSTANTS.START_TIME_TIP;
+
+  /**
+   * This is tip for end time
+   *
+   * @type {string}
+   */
+  endTimeInputTip: string = FORM_CONSTANTS.END_TIME_TIP;
+
+  /**
+   * This is tip for deleting a task row
+   *
+   * @type {string}
+   */
+  deleteTaskInputTip: string = FORM_CONSTANTS.DELETE_TASK_TIP;
+
+  /**
    * This method is one of the lifecycle hooks for the AppComponent, it is called in the beginning of the component.
    * It also updates the current style to dark, as it uses a light background, so that the updated style would be captured by the navigation component to change the color of navigation component. It starts the loader as soon as this component comes to the view, as it needs to fetch user information in the background from backend
    *
@@ -81,8 +111,8 @@ export class TasksComponent implements OnInit {
            * If taskList received from backend has no elements, then pushing a single row
            */
           // if (this.taskList.length === 0) this.taskList.push(this.task);
-          if (this.taskList.length === 0)
-            this.taskList = this.generateDefaultTaskList();
+          // if (this.taskList.length === 0)
+          //   this.taskList = this.generateDefaultTaskList();
         })
       )
       .subscribe({
@@ -117,8 +147,7 @@ export class TasksComponent implements OnInit {
            * Showing a success toastr with message either from backend or a static success message
            */
           this.toastrService.error(
-            backendResponse.message ||
-              BACKEND_ACTION_CONSTANTS.UNABLE_TO_FETCH_TIMESHEET
+            BACKEND_ACTION_CONSTANTS.UNABLE_TO_FETCH_TIMESHEET
           );
         },
       });
@@ -349,7 +378,9 @@ export class TasksComponent implements OnInit {
      */
     if (!validationStatus) {
       this.sharedService.updateLoaderStatus(false);
+      this.toastrService.info(FORM_CONSTANTS.TASK_FORM_VALDITY);
       this.createFormErrorToastr(FORM_CONSTANTS.INVALID_FORM);
+
       return;
     }
 
@@ -443,11 +474,11 @@ export class TasksComponent implements OnInit {
   }
 
   /**
-   * This method generates a new task list with 24 rows i.e. one for each hour interval (this one's for you lazy users)
+   * This method is called when user clicks on the generate timing button. It generates a new task list with 24 rows i.e. one for each hour interval (this one's for you lazy users), and shows them in the UI.
    *
-   * @returns {[Task]} it array of task list
+   * @returns {void} it returns nothing
    */
-  generateDefaultTaskList(): Task[] {
+  generateDefaultTaskList(): void {
     /**
      * This is the default task list, pre initialized with []
      *
@@ -470,13 +501,10 @@ export class TasksComponent implements OnInit {
         timeUsed: 0.983,
       };
 
-      this.loggerService.log([
-        `${i < 10 ? '0' : ''}${i}:00`,
-        `${i < 10 ? '0' : ''}${i}:59`,
-      ]);
       defaultTaskListWithOneHourInterval.push(task);
     }
-    return defaultTaskListWithOneHourInterval;
+
+    this.taskList = defaultTaskListWithOneHourInterval;
   }
 
   /**

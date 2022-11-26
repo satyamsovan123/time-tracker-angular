@@ -2,42 +2,53 @@
   <div class="main-form overflow-table">
     <table class="table table-borderless">
       <thead>
-        <tr>
-          <th scope="col">Start time</th>
-          <th scope="col">End time</th>
-          <th scope="col">
+        <tr class="d-flex justify-content-between">
+          <th class="col-3" scope="col">Start time</th>
+          <th class="col-3" scope="col">End time</th>
+          <th class="col-3" scope="col">
             <span class="desktop-optimized">Time used (hours)</span
             ><span class="mobile-optimized">Used</span>
           </th>
+          <th class="col-3" scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let task of taskList; let index = index">
-          <td>
+        <tr class="d-flex" *ngFor="let task of taskList; let index = index">
+          <td class="col-3">
             <input
+              attr.title="{{ startTimeInputTip }}"
               type="time"
               class="form-control"
               name="startTime{{ index }}"
               [(ngModel)]="task.startTime"
             />
           </td>
-          <td>
+          <td class="col-3">
             <input
+              attr.title="{{ endTimeInputTip + task.startTime + '.' }}"
               type="time"
               class="form-control"
               name="endTime{{ index }}"
               [(ngModel)]="task.endTime"
             />
           </td>
-          <td>
+          <td class="col-3">
             <input
+              attr.title="{{
+                timeUsedInputTip + task.startTime + ' and ' + task.endTime + '.'
+              }}"
               type="number"
-              class="form-control"
+              class="form-control time-used-input"
               name="timeUsed{{ index }}"
               [(ngModel)]="task.timeUsed"
             />
           </td>
-          <td>
+          <td
+            class="col-lg-3 col-md-3"
+            attr.title="{{
+              deleteTaskInputTip + task.startTime + ' to ' + task.endTime + '?'
+            }}"
+          >
             <svg
               (click)="deleteTask(index)"
               id="delete-button"
@@ -77,15 +88,23 @@
       type="button"
       class="custom-button btn btn-primary dark-button"
     >
-      Add new timings
+      Add one
+    </button>
+
+    <button
+      (click)="generateDefaultTaskList()"
+      type="button"
+      class="clear-tasks-buttton custom-button btn btn-primary dark-button"
+    >
+      Generate default
     </button>
 
     <button
       (click)="clearAllTasks()"
       type="button"
-      class="custom-button btn btn-primary dark-button"
+      class="clear-tasks-buttton custom-button btn btn-primary dark-button"
     >
-      Clear all timings
+      Delete all
     </button>
 
     <button
@@ -93,7 +112,7 @@
       (click)="saveChanges()"
       class="save-changes-button custom-button btn btn-primary dark-button"
     >
-      Save changes
+      Save
     </button>
   </div>
 </main>
