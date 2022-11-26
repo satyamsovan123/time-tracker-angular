@@ -449,42 +449,30 @@ export class TasksComponent implements OnInit {
    */
   generateDefaultTaskList(): Task[] {
     /**
+     * This is the task model, pre initialized with some default values
+     *
+     * @type {Task}
+     */
+    let task: Task = {
+      startTime: '00:00',
+      endTime: '01:00',
+      timeUsed: 1,
+    };
+
+    this.loggerService.log(['ss', task]);
+
+    /**
      * This is the default task list, pre initialized with []
      *
      * @type {[Task]}
      */
     let defaultTaskListWithOneHourInterval: Task[] = [];
 
-    /**
-     * Generating the startTime and endTime using loop
-     */
     for (let i = 0; i < 24; i++) {
-      /**
-       * This is the task model, pre initialized with some default values
-       *
-       * @type {Task}
-       */
-      let task: Task = {
-        startTime: `${i < 10 ? '0' : ''}${i}:00`,
-        endTime: `${i < 10 ? '0' : ''}${i}:59`,
-        timeUsed: 0.983,
-      };
-
-      this.loggerService.log([
-        `${i < 10 ? '0' : ''}${i}:00`,
-        `${i < 10 ? '0' : ''}${i}:59`,
-      ]);
+      task.startTime = `${i}:00`;
+      this.loggerService.log(task);
       defaultTaskListWithOneHourInterval.push(task);
     }
     return defaultTaskListWithOneHourInterval;
-  }
-
-  /**
-   * This method is called when user clicks on the clear all timings button, it empties the table
-   *
-   * @returns {void} it returns nothing
-   */
-  clearAllTasks(): void {
-    this.taskList = [];
   }
 }
