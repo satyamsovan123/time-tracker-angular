@@ -22,7 +22,6 @@ import { environment } from 'src/environments/environment';
  * @requires {@link BackendService}
  * @requires {@link ToastrService}
  * @requires {@link LoggerService}
- *
  */
 @Component({
   selector: 'app-signin',
@@ -281,7 +280,7 @@ export class SigninComponent implements OnInit {
         /**
          * This method is called if the request made to backend was not successful
          *
-         * @param response is the response from backend
+         * @param {any} response is the response from backend
          */
         error: (response: any) => {
           /**

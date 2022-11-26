@@ -1,6 +1,5 @@
 import {
   AfterContentChecked,
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   OnInit,
@@ -23,6 +22,12 @@ export class AppComponent implements OnInit, AfterContentChecked {
     private cdRef: ChangeDetectorRef
   ) {}
 
+  /**
+   * This method is one of the lifecycle hooks for the AppComponent, it is called in the after the default change detector has completed checking all the content.
+   * This is done in order to check the change in the loader status correctly
+   *
+   * @returns {void} it returns nothing
+   */
   ngAfterContentChecked(): void {
     this.cdRef.detectChanges();
   }

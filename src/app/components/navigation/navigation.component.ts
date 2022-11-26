@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  BACKEND_ACTION_CONSTANTS,
-  REQUEST_RESPONSE_BODY_HEADER_CONSTANTS,
-} from 'src/app/constants/backend.constant';
+import { BACKEND_ACTION_CONSTANTS } from 'src/app/constants/backend.constant';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { LoggerService } from 'src/app/services/utils/logger.service';
 import { SharedService } from 'src/app/services/utils/shared.service';
-import { from } from 'rxjs';
 import { JwtService } from 'src/app/services/utils/jwt.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -18,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
  * @requires {@link LoggerService}
  * @requires {@link BackendService}
  * @requires {@link JwtService}
- *
  */
 @Component({
   selector: 'app-navigation',
@@ -78,8 +73,8 @@ export class NavigationComponent implements OnInit {
     this.sharedService.removeTokenFromLocalStorage();
 
     /**
-     * Setting the updateToken to empty, this is done to not show the navbar elements that are require authentication,
-     * navigating to sign in page after that
+     * Setting the updateToken to empty, this is done to hide the navbar elements that are require authentication,
+     * navigating to sign in page thereafter
      */
     this.sharedService.updateToken('');
     this.router.navigateByUrl('/signin');

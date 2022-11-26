@@ -6,7 +6,6 @@ import { SharedService } from 'src/app/services/utils/shared.service';
  * This component serves as main component where users sees the error message
  *
  * @requires {@link SharedService}
- *
  */
 @Component({
   selector: 'app-error',

@@ -10,7 +10,6 @@ import { SharedService } from 'src/app/services/utils/shared.service';
  * @requires {@link SharedService}
  * @requires {@link LoggerService}
  * @requires {@link GenerateHelpDataService}
- *
  */
 @Component({
   selector: 'app-help',

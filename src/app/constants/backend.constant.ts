@@ -1,6 +1,4 @@
 export const API_CONSTANTS = {
-  NUMBER_TO_WORD_API:
-    'https://www.dataaccess.com/webservicesserver/numberconversion.wso/NumberToWords/JSON/debug?ubiNum=',
   SIGNUP: '/signup',
   SIGNIN: '/signin',
   GET_PROFILE: '/get-profile',

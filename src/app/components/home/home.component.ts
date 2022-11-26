@@ -13,7 +13,6 @@ import { SharedService } from 'src/app/services/utils/shared.service';
  *
  * @requires {@link SharedService}
  * @requires {@link LoggerService}
- *
  */
 @Component({
   selector: 'app-home',
@@ -78,7 +77,8 @@ export class HomeComponent implements OnInit {
      * @type {number}
      * @const
      */
-    const svgLength = this.backgroundLine.nativeElement.getTotalLength();
+    const svgLength: number =
+      this.backgroundLine.nativeElement.getTotalLength();
 
     /**
      * Updating the start position of the background SVG line

@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { REQUEST_RESPONSE_BODY_HEADER_CONSTANTS } from 'src/app/constants/backend.constant';
-import { JwtService } from './jwt.service';
 
 /**
  * This service is used to get and set the shared variables (observables mostly), across the module
  *
  * @requires {@link JwtService}
- *
  */
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
-  constructor(private jwtService: JwtService) {}
-
   /**
    * This observable holds the current style of the background
    *
@@ -91,35 +87,4 @@ export class SharedService {
   updateToken(token: string): void {
     this.currentToken.next(token);
   }
-
-  // /**
-  //  * This method updates the current authentication status, i.e. pushes a new value to the stream
-  //  *
-  //  * @param {{boolean}} status is the boolean that is updated, which is then received by all the subscribers
-  //  * @returns {void} it returns nothing
-  //  */
-  // updateUserAuthenticationStatus(status: boolean): void {
-  //   this.currentAuthenticationStatus.next(status);
-  // }
-
-  // /**
-  //  * This method gets the current authentication status
-  //  *
-  //  * @returns {Promise<boolean>}
-  //  */
-  // getUserAuthenticationStatus(): Promise<boolean> {
-  //   return new Promise((resolve, reject) => {
-  //     this.currentAuthenticationStatus.subscribe({
-  //       next: (currentAuthenticationStatus: boolean) => {
-  //         const currentToken = this.getTokenFromLocalStorage();
-  //         console.log(currentAuthenticationStatus, currentToken);
-
-  //         resolve(currentAuthenticationStatus);
-  //       },
-  //       error: (error) => {
-  //         reject(false);
-  //       },
-  //     });
-  //   });
-  // }
 }

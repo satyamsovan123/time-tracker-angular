@@ -208,6 +208,7 @@ export class SignupComponent implements OnInit {
 
     /**
      * This is the user variable that is made using the Signup model
+     * Changing the first letters of the names to capital
      *
      * @type {Signup}
      * @const
@@ -215,8 +216,12 @@ export class SignupComponent implements OnInit {
     const newUser: Signup = {
       email: this.signupForm.value.email,
       password: this.signupForm.value.password,
-      firstName: this.signupForm.value.firstName,
-      lastName: this.signupForm.value.lastName,
+      firstName: this.signupForm.value.firstName
+        .toLowerCase()
+        .replace(/\b\w/g, (firstName: string) => firstName.toUpperCase()),
+      lastName: this.signupForm.value.lastName
+        .toLowerCase()
+        .replace(/\b\w/g, (lastName: string) => lastName.toUpperCase()),
     };
 
     /**
@@ -236,7 +241,7 @@ export class SignupComponent implements OnInit {
         /**
          * This method is called on successful completion of the request made to backend
          *
-         * @param response is the response from backend
+         * @param {any} response is the response from backend
          */
         next: (response: any) => {
           /**
@@ -285,9 +290,9 @@ export class SignupComponent implements OnInit {
         /**
          * This method is called if the request made to backend was not successful
          *
-         * @param response is the response from backend
+         * @param {any} response is the response from backend
          */
-        error: (response) => {
+        error: (response: any) => {
           /**
            * This is the response from backend that is mapped using the BackendResponse model
            *

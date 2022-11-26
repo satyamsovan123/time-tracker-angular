@@ -1,30 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor } from '@angular/common/http';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpHandler } from '@angular/common/http';
 import { HttpEvent } from '@angular/common/http';
-import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {
-  API_CONSTANTS,
-  REQUEST_RESPONSE_BODY_HEADER_CONSTANTS,
-} from 'src/app/constants/backend.constant';
+
 import { LoggerService } from '../utils/logger.service';
 import { SharedService } from '../utils/shared.service';
 import { JwtService } from '../utils/jwt.service';
 import { ToastrService } from 'ngx-toastr';
-import { COMMON_CONSTANTS } from 'src/app/constants/common.constant';
 
 /**
- * This service is used to intercept each HTTP request and the add authorization details and then send the request
+ * This service is used to intercept each HTTP request and the add authorization details and then continue further to send the request
  *
  * @requires {@link JwtService}
  * @requires {@link SharedService}
  * @requires {@link JwtService}
  * @requires {@link ToastrService}
  * @requires {@link LoggerService}
- *
  */
 @Injectable({
   providedIn: 'root',
@@ -32,10 +25,8 @@ import { COMMON_CONSTANTS } from 'src/app/constants/common.constant';
 export class InterceptorService {
   constructor(
     private router: Router,
-    private loggerService: LoggerService,
     private sharedService: SharedService,
-    private jwtService: JwtService,
-    private toastrService: ToastrService
+    private jwtService: JwtService
   ) {}
 
   /**
@@ -56,7 +47,6 @@ export class InterceptorService {
       this.sharedService.getTokenFromLocalStorage()
     );
     if (!isValidTokenPresent) {
-      // this.toastrService.info(COMMON_CONSTANTS.FORCE_SIGNED_OUT);
       this.router.navigateByUrl('/signin');
     }
     /**

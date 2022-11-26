@@ -1,11 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/services/utils/shared.service';
 
 /**
  * This component serves as main component to show the loader and it contains the logic to show loader or disable the loader
  *
  * @requires {@link SharedService}
- *
  */
 @Component({
   selector: 'app-loader',

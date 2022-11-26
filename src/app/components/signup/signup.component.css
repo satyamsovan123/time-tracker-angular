@@ -7,6 +7,14 @@
   box-shadow: var(--box-shadow);
 }
 
+.name {
+  text-transform: capitalize;
+}
+
+.name::placeholder {
+  text-transform: none;
+}
+
 input::placeholder {
   color: var(--dark-theme);
   font-size: 12px;
