@@ -7,9 +7,14 @@
       <div class="form-center">
         <form [formGroup]="signinForm">
           <div class="mb-3">
-            <label for="email" class="form-label"
-              >Email <span *ngIf="checkRequirement('email')">*</span></label
-            >
+            <div class="d-flex justify-content-between">
+              <label for="email" class="form-label"
+                >Email <span *ngIf="checkRequirement('email')">*</span></label
+              >
+              <label *ngIf="signinForm.get('email').hasError('email')"
+                >Please enter a valid email.</label
+              >
+            </div>
             <input
               formControlName="email"
               type="email"
@@ -19,15 +24,20 @@
                 signinForm.get('email').touched ||
                 (signinForm.get('email').hasError('required') && this.submitted)
                   ? this.invalidEmail
-                  : ''
+                  : 'Please enter your email'
               "
             />
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label"
-              >Password
-              <span *ngIf="checkRequirement('password')">*</span></label
-            >
+            <div class="d-flex justify-content-between">
+              <label for="password" class="form-label"
+                >Password
+                <span *ngIf="checkRequirement('password')">*</span></label
+              >
+              <label *ngIf="signinForm.get('password').hasError('minLength')"
+                >Please enter a password of atleast 6 digits.</label
+              >
+            </div>
             <input
               formControlName="password"
               type="password"
@@ -38,7 +48,7 @@
                 (signinForm.get('password').hasError('required') &&
                   this.submitted)
                   ? this.invalidPassword
-                  : ''
+                  : 'Please enter your password'
               "
             />
           </div>

@@ -30,17 +30,17 @@ export const FORM_CONSTANTS = {
     'There are some invalid entries, please correct them and resubmit.',
   TASK_FORM_VALDITY:
     'The start time and end time and time used cannot be empty. Start time should be less than the end time, time used should be less than the logged time.',
-  INVALID_EMAIL: 'Invalid email, please provide a valid email address.',
+  INVALID_EMAIL: 'Invalid email, please enter a valid email.',
   INVALID_PASSWORD:
-    'Invalid password, please provide a valid email password of 6 digits.',
+    'Invalid password, please enter a password of atleast 6 digits.',
   INVALID_FIRSTNAME:
-    'Invalid first name, please provide a valid first name with letters and numbers.',
+    'Invalid first name, please enter a valid first name with letters and numbers.',
   INVALID_LASTNAME:
-    'Invalid last name, please provide a valid last name with letters and numbers.',
+    'Invalid last name, please enter a valid last name with letters and numbers.',
 
-  INVALID_START_TIME: 'Invalid start time, please provide a valid time',
-  INVALID_END_TIME: 'Invalid end time, please provide a valid time',
-  INVALID_TIME_USED: 'Invalid starting time, please provide a valid time',
+  INVALID_START_TIME: 'Invalid start time, please enter a valid time',
+  INVALID_END_TIME: 'Invalid end time, please enter a valid time',
+  INVALID_TIME_USED: 'Invalid starting time, please enter a valid time',
   FOR_ROW: 'for row',
   START_TIME_TIP: 'Please enter the time you want to log.',
   TIME_USED_TIP: 'Please enter total time you have used between ',

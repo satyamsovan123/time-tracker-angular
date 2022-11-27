@@ -7,10 +7,16 @@
       <div class="form-center">
         <form [formGroup]="signupForm">
           <div class="mb-3">
-            <label for="firstName" class="form-label"
-              >First name
-              <span *ngIf="checkRequirement('firstName')">*</span></label
-            >
+            <div class="d-flex justify-content-between">
+              <label for="firstName" class="form-label"
+                >First name
+                <span *ngIf="checkRequirement('firstName')">*</span></label
+              >
+              <label *ngIf="signupForm.get('firstName').hasError('pattern')"
+                >Please enter letters and numbers.</label
+              >
+            </div>
+
             <input
               formControlName="firstName"
               type="text"
@@ -21,15 +27,20 @@
                 (signupForm.get('firstName').hasError('required') &&
                   this.submitted)
                   ? this.invalidFirstName
-                  : ''
+                  : 'Please enter your first name'
               "
             />
           </div>
           <div class="mb-3">
-            <label for="lastName" class="form-label"
-              >Last name
-              <span *ngIf="checkRequirement('lastName')">*</span></label
-            >
+            <div class="d-flex justify-content-between">
+              <label for="lastName" class="form-label"
+                >Last name
+                <span *ngIf="checkRequirement('lastName')">*</span></label
+              >
+              <label *ngIf="signupForm.get('lastName').hasError('pattern')"
+                >Please enter letters and numbers.</label
+              >
+            </div>
             <input
               formControlName="lastName"
               type="text"
@@ -40,14 +51,20 @@
                 (signupForm.get('lastName').hasError('required') &&
                   this.submitted)
                   ? this.invalidLastName
-                  : ''
+                  : 'Please enter your last name'
               "
             />
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label"
-              >Email <span *ngIf="checkRequirement('email')">*</span></label
-            >
+            <div class="d-flex justify-content-between">
+              <label for="email" class="form-label"
+                >Email <span *ngIf="checkRequirement('email')">*</span></label
+              >
+              <label *ngIf="signupForm.get('email').hasError('email')"
+                >Please enter a valid email.</label
+              >
+            </div>
+
             <input
               formControlName="email"
               type="email"
@@ -57,15 +74,20 @@
                 signupForm.get('email').touched ||
                 (signupForm.get('email').hasError('required') && this.submitted)
                   ? this.invalidEmail
-                  : ''
+                  : 'Please enter your email'
               "
             />
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label"
-              >Password
-              <span *ngIf="checkRequirement('password')">*</span></label
-            >
+            <div class="d-flex justify-content-between">
+              <label for="password" class="form-label"
+                >Password
+                <span *ngIf="checkRequirement('password')">*</span></label
+              >
+              <label *ngIf="signupForm.get('password').hasError('minLength')"
+                >Please enter a password of atleast 6 digits.</label
+              >
+            </div>
             <input
               formControlName="password"
               type="password"
@@ -76,12 +98,12 @@
                 (signupForm.get('password').hasError('required') &&
                   this.submitted)
                   ? this.invalidPassword
-                  : ''
+                  : 'Please enter your password'
               "
             />
           </div>
           <p id="emailHelp" class="disclaimer">
-            We will never share your data with anyone.
+            Your privacy is protected by responsible data practices.
           </p>
           <button
             type="button"

@@ -46,7 +46,15 @@ export class InterceptorService {
     const isValidTokenPresent = this.jwtService.validateJWT(
       this.sharedService.getTokenFromLocalStorage()
     );
-    if (!isValidTokenPresent) {
+
+    /**
+     * Checking if the API call is not made from /signup or /signin page, we don't need or would be having a valid token yet
+     */
+    if (
+      !isValidTokenPresent &&
+      this.router.url !== '/signin' &&
+      this.router.url !== '/signup'
+    ) {
       this.router.navigateByUrl('/signin');
     }
     /**

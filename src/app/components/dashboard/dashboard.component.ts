@@ -377,7 +377,6 @@ export class DashboardComponent implements OnInit {
            * Setting the loader status to false, on succesful completion of backend call or on on unsuccesful completion of backend call
            */
           this.sharedService.updateLoaderStatus(false);
-          this.insights.splice(index, 1);
         })
       )
       .subscribe({
@@ -396,6 +395,12 @@ export class DashboardComponent implements OnInit {
           const backendResponse: BackendResponse = new BackendResponse(
             response
           );
+
+          /**
+           * If data is deleted successfully, updating the insights and then regenerating graph data
+           */
+          this.insights.splice(index, 1);
+          this.generateGraphData();
 
           /**
            * Showing a success toastr with message either from backend or a static success message

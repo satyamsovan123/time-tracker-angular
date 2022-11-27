@@ -11,6 +11,11 @@
   text-transform: capitalize;
 }
 
+label {
+  display: flex;
+  /* justify-content: space-around; */
+}
+
 .name::placeholder {
   text-transform: none;
 }
