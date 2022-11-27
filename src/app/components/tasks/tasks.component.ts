@@ -154,10 +154,34 @@ export class TasksComponent implements OnInit {
   }
 
   /**
-   * This method retuns a new task
-   *
+   * This method retuns a new task. By default, it generates current time as start time and one hour after as end time
    */
   createNewTask(): Task {
+    /**
+     * This is the current time
+     *
+     * @type {string}
+     */
+    let currentTime: moment.Moment | string = moment();
+
+    /**
+     * This is adding 59 minutes after the current time
+     *
+     * @type {string}
+     */
+    let oneHourAfter: moment.Moment | string = moment().add(59, 'm');
+
+    /**
+     * Checking if by adding 59 minutes to current time, makes it tommorrow's date, then adjusting it manually to 23:59 hrs.
+     */
+    if (currentTime.format('DD/MM/YY') > oneHourAfter.format('DD/MM/YY')) {
+      currentTime = moment().format('HH:mm').toString();
+      oneHourAfter = moment().add(59, 'm').format('HH:mm').toString();
+    } else {
+      currentTime = moment().format('HH:mm').toString();
+      oneHourAfter = moment().endOf('day').format('HH:mm').toString();
+    }
+
     /**
      * This is the task model, pre initialized with some default values
      *
@@ -165,9 +189,9 @@ export class TasksComponent implements OnInit {
      * @const
      */
     const task: Task = {
-      startTime: '00:00',
-      endTime: '23:59',
-      timeUsed: 1.5,
+      startTime: currentTime,
+      endTime: oneHourAfter,
+      timeUsed: Number(this.calculateTimeDifference(currentTime, oneHourAfter)),
     };
     return task;
   }
