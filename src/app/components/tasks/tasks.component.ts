@@ -315,6 +315,8 @@ export class TasksComponent implements OnInit {
         timeUsed: task.timeUsed,
       });
     });
+    this.loggerService.log(sanitizedTaskList);
+
     return sanitizedTaskList;
   }
 
@@ -498,7 +500,12 @@ export class TasksComponent implements OnInit {
       let task: Task = {
         startTime: `${i < 10 ? '0' : ''}${i}:00`,
         endTime: `${i < 10 ? '0' : ''}${i}:59`,
-        timeUsed: 0.983,
+        timeUsed: Number(
+          this.calculateTimeDifference(
+            `${i < 10 ? '0' : ''}${i}:00`,
+            `${i < 10 ? '0' : ''}${i}:59`
+          )
+        ),
       };
 
       defaultTaskListWithOneHourInterval.push(task);
@@ -514,5 +521,81 @@ export class TasksComponent implements OnInit {
    */
   clearAllTasks(): void {
     this.taskList = [];
+  }
+
+  /**
+   * This method calculates the difference between start time and end time entered by the user
+   *
+   * @param {string} startTime is the start time
+   * @param {string} endTime is the end time
+   * @returns {string} it the calculated time differnece in hours (string)
+   */
+  calculateTimeDifference(startTime: string, endTime: string): string {
+    /**
+     * This variable holds the difference between start time and end time
+     *
+     * @type {string}
+     */
+    let differenceInHours: string = '';
+
+    /**
+     * This variable holds the current date
+     *
+     * @type {string}
+     */
+    const currentDate: string = moment().format('DD/MM/YYYY').toString();
+
+    /**
+     * This variable holds the sanitized start time i.e it's converted from "HH:mm" to ISO
+     *
+     * @type {any}
+     */
+    const sanitizedStartTime: any = moment(
+      currentDate + ' ' + startTime,
+      'DD/MM/YYYY HH:mm',
+      true
+    );
+
+    /**
+     * This variable holds the sanitized end time i.e it's converted from "HH:mm" to ISO
+     *
+     * @type {any}
+     */
+    const sanitizedEndTime: any = moment(
+      currentDate + ' ' + endTime,
+      'DD/MM/YYYY HH:mm',
+      true
+    );
+
+    differenceInHours = moment
+      .duration(sanitizedEndTime.diff(sanitizedStartTime))
+      .asHours()
+      .toPrecision(4)
+      .toString();
+
+    if (
+      !differenceInHours ||
+      differenceInHours === 'NaN' ||
+      Number(differenceInHours) < 0
+    ) {
+      differenceInHours = '0';
+    }
+    return differenceInHours;
+  }
+
+  /**
+   * This method calculates the difference between start time and end time entered by the user, it's called as soon as the user changes the start time and end time input values, it calculates and updates the time used field on the go
+   *
+   * @param {string} index is the end time
+   * @param {string} startTime is the start time
+   * @param {string} endTime is the end time
+   *
+   * @returns {void} it returns nothing
+   */
+  updateTimeUsedValue(index: number, startTime: string, endTime: string): void {
+    this.taskList[index].timeUsed = this.calculateTimeDifference(
+      startTime,
+      endTime
+    );
   }
 }

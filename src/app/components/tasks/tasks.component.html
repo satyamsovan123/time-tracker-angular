@@ -16,6 +16,9 @@
         <tr class="d-flex" *ngFor="let task of taskList; let index = index">
           <td class="col-3">
             <input
+              (change)="
+                this.updateTimeUsedValue(index, task.startTime, task.endTime)
+              "
               attr.title="{{ startTimeInputTip }}"
               type="time"
               class="form-control"
@@ -25,6 +28,9 @@
           </td>
           <td class="col-3">
             <input
+              (change)="
+                this.updateTimeUsedValue(index, task.startTime, task.endTime)
+              "
               attr.title="{{ endTimeInputTip + task.startTime + '.' }}"
               type="time"
               class="form-control"
@@ -35,8 +41,14 @@
           <td class="col-3">
             <input
               attr.title="{{
-                timeUsedInputTip + task.startTime + ' and ' + task.endTime + '.'
-              }}"
+                timeUsedInputTip +
+                  task.startTime +
+                  ' and ' +
+                  task.endTime +
+                  '. Maximum value can be ' +
+                  this.calculateTimeDifference(task.startTime, task.endTime) +
+                  '.'
+              }} "
               type="number"
               class="form-control time-used-input"
               name="timeUsed{{ index }}"

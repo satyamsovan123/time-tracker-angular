@@ -149,11 +149,16 @@ export class DashboardComponent implements OnInit {
     this.sharedService.updateLoaderStatus(true);
 
     /**
+     * Scrolling to the top, on opening the component
+     */
+    window.scroll(0, 0);
+
+    /**
      * To avoid any errors, this block of asynchronous code is placed in try catch block
      */
     try {
       /**
-       * This is the response from the backend for getProfile, it contains the name, and current task for today's date for the logged in user.
+       * This is the response from the backend for getProfile, it contains the name, and current task for today's date for the signed in user.
        * This method waits for the operation to be completed.
        *
        * @type {any}

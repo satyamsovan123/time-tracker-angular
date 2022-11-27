@@ -4,7 +4,7 @@
     <p>Track time with ease. With no fees!</p>
     <button
       type="button"
-      [routerLink]="'/signup'"
+      [routerLink]="isUserSignedIn ? ['/dashboard'] : ['/signup']"
       class="mt-3 custom-button btn btn-primary light-button"
     >
       Get access for free →
@@ -679,7 +679,7 @@
     <h1>So, what are you waiting for?</h1>
     <button
       type="button"
-      [routerLink]="'/signup'"
+      [routerLink]="isUserSignedIn ? ['/dashboard'] : ['/signup']"
       class="mt-3 custom-button btn btn-primary dark-button"
     >
       Take control of your time now →

@@ -27,6 +27,14 @@ export class HomeComponent implements OnInit {
   ) {}
 
   /**
+   * This variable holds true if the user is signed in else it holds false
+   *
+   * @const
+   * @type {boolean}
+   */
+  isUserSignedIn: boolean = false;
+
+  /**
    * Getting the element tagged with #backgroundLine i.e the SVG line
    */
   @ViewChild('backgroundLine') backgroundLine: any;
@@ -39,11 +47,20 @@ export class HomeComponent implements OnInit {
   /**
    * This method is one of the lifecycle hooks for the AppComponent, it is called in the beginning of the component.
    * It also updates the current style to dark, as it uses a dark background, so that the updated style would be captured by the navigation component to change the color of navigation component.
+   * It also updates the value of isUserSignedIn, if the user is signed in
    *
    * @returns {void} it returns nothing
    */
   ngOnInit(): void {
     this.sharedService.updateStyle('dark');
+    /**
+     * This variable holds the current value of token
+     *
+     * @const
+     * @type {string}
+     */
+    const token: string = this.sharedService.getTokenFromLocalStorage();
+    if (token) this.isUserSignedIn = true;
   }
 
   /**
