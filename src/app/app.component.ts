@@ -52,6 +52,10 @@ export class AppComponent implements OnInit, AfterContentChecked {
    * @returns {void} it returns nothing
    */
   ngOnInit(): void {
+    /**
+     * Easter egg: Hello, are you lost?
+     */
+    console.log('Hello, we thank you for using Time Tracker!');
     this.sharedService.showLoader.subscribe((status: boolean) => {
       this.disableBackground = status;
     });

@@ -1,37 +1,43 @@
 <main>
   <section class="welcome">
-    <h1 *ngIf="!currentName">Hello!</h1>
-    <h1 *ngIf="currentName">Hello, {{ currentName }}.</h1>
-    <p *ngIf="!insights.length">
-      It looks like you've not added any data yet. Click
-      <span [routerLink]="'/tasks'" class="hyperlink">here</span> to go to the
-      current tasks section to add new data for today. After that, you can view
-      your data below. The chart below shows your progress. You can delete any
-      insights, and you can also delete your profile entirely if you want,
-      however, this is a non reversible action. To delete your profile, click
-      <span
-        data-bs-toggle="modal"
-        data-bs-target="#deleteModal"
-        class="hyperlink"
-        >here</span
-      >. If you want any help, click
-      <span [routerLink]="'/help'" class="hyperlink">here</span>
-      to go to the help section.
-    </p>
-    <p *ngIf="insights.length">
-      It looks like you've been working hard. You can view your data below. The
-      chart at the last shows your progress. You can delete any insights, and
-      you can also delete your profile entirely if you want, however, this is a
-      non reversible action. To delete your profile, click
-      <span
-        data-bs-toggle="modal"
-        data-bs-target="#deleteModal"
-        class="hyperlink"
-        >here</span
-      >. If you want any help, click
-      <span [routerLink]="'/help'" class="hyperlink">here</span>
-      to go to the help section.
-    </p>
+    <h1 *ngIf="!currentName">Hello.</h1>
+    <div *ngIf="currentName">
+      <h1>Hello, {{ currentName }}</h1>
+    </div>
+
+    <div class="mt-2">
+      <p *ngIf="!insights.length">
+        It looks like you've not added any data yet. Click
+        <span [routerLink]="'/tasks'" class="hyperlink">here</span> to go to the
+        current tasks section to add new data for today. After that, you can
+        view your data below. The chart below shows your progress. You can
+        delete any insights, and you can also delete your profile entirely if
+        you want, however, this is a non reversible action. To delete your
+        profile, click
+        <span
+          data-bs-toggle="modal"
+          data-bs-target="#deleteModal"
+          class="hyperlink"
+          >here</span
+        >. If you want any help, click
+        <span [routerLink]="'/help'" class="hyperlink">here</span>
+        to go to the help section.
+      </p>
+      <p *ngIf="insights.length">
+        It looks like you've been working hard. You can view your data below.
+        The chart at the last shows your progress. You can delete any insights,
+        and you can also delete your profile entirely if you want, however, this
+        is a non reversible action. To delete your profile, click
+        <span
+          data-bs-toggle="modal"
+          data-bs-target="#deleteModal"
+          class="hyperlink"
+          >here</span
+        >. If you want any help, click
+        <span [routerLink]="'/help'" class="hyperlink">here</span>
+        to go to the help section.
+      </p>
+    </div>
   </section>
 
   <div
@@ -105,11 +111,11 @@
             <div class="accordion-body">
               <p>
                 On {{ this.convertStringToDate(insight.dateAdded) }}, you have
-                logged {{ insight.totalTimeLogged | number: "2.0-2" }} hours of
+                logged {{ insight.totalTimeLogged | number: "0.0-2" }} hours of
                 time, out of which you have used
-                {{ insight.timeUsed | number }} hours. Also, you've utilized
-                {{ insight.percentage | number: "2.0-2" }}
-                of the time efficiently. {{ insight.comment }}
+                {{ insight.timeUsed | number: "0.0-2" }} hours. Also, you've
+                utilized {{ insight.percentageUsed | number: "0.0-2" }}% of the
+                time efficiently. {{ insight.comment }}
               </p>
               <button
                 type="button"

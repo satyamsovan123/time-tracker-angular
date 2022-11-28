@@ -173,7 +173,10 @@ export class DashboardComponent implements OnInit {
        * @const
        */
       this.currentName =
-        getProfileResult.data.firstName + ' ' + getProfileResult.data.lastName;
+        getProfileResult.data.firstName +
+        ' ' +
+        getProfileResult.data.lastName +
+        '.';
 
       /**
        * This is the response from the backend for getInsights, it contains the insights i.e the history of data for total hours logged in and total hours used for a given date.
@@ -440,5 +443,9 @@ export class DashboardComponent implements OnInit {
           );
         },
       });
+  }
+
+  nameChanged(e: any) {
+    console.log(e);
   }
 }

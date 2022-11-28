@@ -594,7 +594,6 @@ export class TasksComponent implements OnInit {
     differenceInHours = moment
       .duration(sanitizedEndTime.diff(sanitizedStartTime))
       .asHours()
-      .toPrecision(4)
       .toString();
 
     if (
