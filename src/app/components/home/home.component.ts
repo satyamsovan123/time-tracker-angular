@@ -27,6 +27,14 @@ export class HomeComponent implements OnInit {
   ) {}
 
   /**
+   * This variable holds the current year, which will be shown in the footer
+   *
+   * @const
+   * @type {number}
+   */
+  currentYear: number = new Date().getFullYear();
+
+  /**
    * This variable holds true if the user is signed in else it holds false
    *
    * @const
