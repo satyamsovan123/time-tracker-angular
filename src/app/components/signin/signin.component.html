@@ -5,17 +5,56 @@
   <div class="row">
     <div class="col-lg-6 col-md-12">
       <div class="form-center">
-        <form>
+        <form [formGroup]="signinForm">
           <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" />
+            <div class="d-flex justify-content-between">
+              <label for="email" class="form-label"
+                >Email <span *ngIf="checkRequirement('email')">*</span></label
+              >
+              <label *ngIf="signinForm.get('email').hasError('email')"
+                >Please enter a valid email.</label
+              >
+            </div>
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="email"
+              [placeholder]="
+                signinForm.get('email').touched ||
+                (signinForm.get('email').hasError('required') && this.submitted)
+                  ? this.invalidEmail
+                  : 'Please enter your email'
+              "
+            />
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" />
+            <div class="d-flex justify-content-between">
+              <label for="password" class="form-label"
+                >Password
+                <span *ngIf="checkRequirement('password')">*</span></label
+              >
+              <label *ngIf="signinForm.get('password').hasError('minLength')"
+                >Please enter a password of atleast 6 digits.</label
+              >
+            </div>
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              id="password"
+              [placeholder]="
+                signinForm.get('password').touched ||
+                (signinForm.get('password').hasError('required') &&
+                  this.submitted)
+                  ? this.invalidPassword
+                  : 'Please enter your password'
+              "
+            />
           </div>
           <button
             type="button"
+            (click)="onSubmit()"
             class="mt-3 custom-button btn btn-primary light-button"
           >
             Sign in
@@ -26,28 +65,7 @@
   </div>
 </main>
 
-<!-- <main>
-  <div class="center">
-    <div class="form-center">
-      <form>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" />
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" />
-        </div>
-        <button
-          type="button"
-          class="custom-button mt-3 btn btn-primary light-button"
-        >
-          Sign in
-        </button>
-      </form>
-    </div>
-  </div>
-  <div class="background-icons">
-    <img src="../assets/background-icons.png" alt="" />
-  </div>
-</main> -->
+<div *ngIf="!productionEnvironment" class="text-center debugger">
+  {{ signinForm.value | json }}
+  {{ signinForm.status | json }}
+</div>

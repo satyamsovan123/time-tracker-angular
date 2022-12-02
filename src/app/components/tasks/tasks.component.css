@@ -1,0 +1,138 @@
+main {
+  margin-top: var(--margin-top);
+}
+
+.overflow-table {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.main-form {
+  border-radius: var(--border-radius);
+  border: var(--border-size) solid var(--dark-theme);
+  max-height: 80vh;
+  padding: 2%;
+  box-shadow: var(--box-shadow);
+}
+
+table {
+  text-align: left;
+}
+
+thead {
+  margin-top: 12%;
+}
+
+input {
+  background-color: var(--light-theme);
+  border-radius: var(--border-radius);
+  border: var(--border-size) var(--dark-theme) solid !important;
+  width: 50%;
+}
+
+input:focus {
+  background-color: var(--light-theme);
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(54%) sepia(91%) saturate(1776%) hue-rotate(340deg)
+    brightness(103%) contrast(87%);
+}
+
+svg {
+  cursor: pointer;
+  height: 40px;
+}
+
+.custom-button {
+  margin-right: var(--margin-right);
+  margin-top: var(--margin-top);
+  padding-bottom: 1% !important;
+  padding-top: 1% !important;
+}
+
+th {
+  color: var(--dark-theme) !important;
+  font-size: var(--section-paragraph-size) !important;
+  font-weight: var(--regular) !important;
+}
+
+tr {
+  text-align-last: left;
+}
+
+.td-width {
+  width: 40% !important;
+}
+
+.scrollable-view {
+  overflow-x: scroll;
+}
+
+.mobile-optimized {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-button {
+    margin-right: 0;
+    margin-top: var(--margin-top);
+    padding-bottom: var(--padding-bottom);
+    padding-top: var(--padding-top);
+  }
+
+  .buttons {
+    justify-content: space-between;
+  }
+
+  .buttons > button {
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  .save-changes-button,
+  .clear-tasks-buttton {
+    margin-left: 2%;
+  }
+}
+
+@media (max-width: 500px) {
+  .time-used-input {
+    width: 120%;
+  }
+  .main-form {
+    margin-top: 10%;
+  }
+
+  .desktop-optimized {
+    display: none;
+  }
+
+  .mobile-optimized {
+    display: block;
+  }
+
+  input {
+    width: 110%;
+  }
+
+  .custom-button {
+    margin-top: 2%;
+    padding-bottom: 2% !important;
+    padding-top: 2% !important;
+  }
+
+  svg {
+    height: 30px;
+  }
+
+  .save-changes-button {
+    margin-left: 2%;
+  }
+}

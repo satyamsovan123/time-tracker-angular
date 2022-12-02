@@ -1,0 +1,26 @@
+h1 {
+  color: var(--dark-theme);
+  font-size: var(--heading-size);
+  font-weight: var(--bold);
+}
+
+p {
+  color: var(--dark-theme);
+}
+
+main {
+  margin-top: 8%;
+}
+
+.qna {
+  margin-bottom: 4%;
+}
+
+@media (max-width: 500px) {
+  main {
+    margin-top: 10%;
+  }
+  .qna {
+    margin-bottom: 10%;
+  }
+}
