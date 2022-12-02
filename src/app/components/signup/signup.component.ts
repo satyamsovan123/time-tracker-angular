@@ -177,7 +177,6 @@ export class SignupComponent implements OnInit {
    * @returns {void} it returns nothing
    */
   onSubmit(): void {
-    console.log(this.signupForm);
     /**
      * Setting the loader status to true, as it might take some time to validate form, send and receive data from backend
      */
@@ -258,7 +257,6 @@ export class SignupComponent implements OnInit {
           const backendResponse: BackendResponse = new BackendResponse(
             response.body
           );
-          console.log(response.body);
 
           /**
            * Showing a success toastr with message either from backend or a static success message
