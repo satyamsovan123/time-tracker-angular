@@ -446,6 +446,5 @@ export class DashboardComponent implements OnInit {
   }
 
   nameChanged(e: any) {
-    console.log(e);
   }
 }
